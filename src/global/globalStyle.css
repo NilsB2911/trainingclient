@@ -1,9 +1,13 @@
 @import "../styles/barStyle.css";
 @import "../styles/routine.css";
 @import "../styles/info.css";
+@import "../styles/toolbarStyle.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 :root {
     --primary-blue: #4AE4C5;
+    --secondary-blue: #145f50;
     --primary-black: #0F0F0F;
     --secondary-black: #616161;
 }
@@ -23,9 +27,15 @@ body {
     grid-gap: 20px;
 }
 
+.headline {
+    font-family: 'Bebas Neue', cursive;
+    color: var(--secondary-black);
+}
+
 #content {
     display: flex;
     flex-direction: column;
+    grid-gap: 20px;
 }
 
 /* Custom Scrollbar, yeah */
@@ -42,7 +52,7 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--secondary-black);
+    background: var(--secondary-blue);
     border-radius: 5px;
 }
 

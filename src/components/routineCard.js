@@ -11,7 +11,7 @@ class RoutineCard extends Component {
 
     render() {
         return (
-            <div className={"routineCard"}>
+            <div className={"routineCard headline"}>
                 <p>{this.props.id}</p>
                 <p>{this.props.name}</p>
                 <p>{this.props.time}</p>

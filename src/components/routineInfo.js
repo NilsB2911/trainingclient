@@ -4,7 +4,7 @@ import "../global/globalStyle.css";
 class RoutineInfo extends Component {
     render() {
         return (
-            <div id={"infoBlock"}>
+            <div id={"infoBlock"} className={"headline"}>
                 Hallo
             </div>
         );

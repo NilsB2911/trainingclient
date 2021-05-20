@@ -8,5 +8,5 @@
 #progress {
     height: 10vh;
     width: 80vh;
-    background-color: yellow;
+    background-color: var(--secondary-blue);
 }
