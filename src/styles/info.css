@@ -1,0 +1,12 @@
+#infoBlock {
+    margin-top: 2vh;
+    height: 80vh;
+    width: 80vh;
+    background-color: var(--primary-black);
+}
+
+#progress {
+    height: 10vh;
+    width: 80vh;
+    background-color: yellow;
+}

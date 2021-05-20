@@ -1,0 +1,6 @@
+.routineCard {
+    margin: 2vh;
+    padding: 2vh;
+    background-color: var(--primary-blue);
+    color: var(--primary-black);
+}

@@ -1,0 +1,52 @@
+@import "../styles/barStyle.css";
+@import "../styles/routine.css";
+@import "../styles/info.css";
+
+:root {
+    --primary-blue: #4AE4C5;
+    --primary-black: #0F0F0F;
+    --secondary-black: #616161;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+}
+
+#sidebarsDiv {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 20px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Custom Scrollbar, yeah */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--secondary-black);
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-black);
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-blue);
+}
