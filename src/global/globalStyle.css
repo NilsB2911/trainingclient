@@ -48,6 +48,7 @@ body {
 ::-webkit-scrollbar-track {
     background: var(--secondary-black);
     border-radius: 5px;
+    margin: 2vh 0;
 }
 
 /* Handle */

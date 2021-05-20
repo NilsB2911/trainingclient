@@ -52,47 +52,47 @@ class Sidebar extends Component {
                 time: "6"
             },
             {
-                id: 0,
+                id: 9,
                 text: "r1",
                 time: "10"
             },
             {
-                id: 1,
+                id: 10,
                 text: "r2",
                 time: "5"
             },
             {
-                id: 2,
+                id: 11,
                 text: "r2",
                 time: "5"
             },
             {
-                id: 3,
+                id: 12,
                 text: "r2",
                 time: "10"
             },
             {
-                id: 4,
+                id: 13,
                 text: "r2",
                 time: "5"
             },
             {
-                id: 5,
+                id: 14,
                 text: "r2",
                 time: "10"
             },
             {
-                id: 6,
+                id: 15,
                 text: "r2",
                 time: "5"
             },
             {
-                id: 7,
+                id: 16,
                 text: "r2",
                 time: "5"
             },
             {
-                id: 8,
+                id: 17,
                 text: "r2",
                 time: "6"
             }
