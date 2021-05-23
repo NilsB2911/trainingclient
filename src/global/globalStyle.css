@@ -2,6 +2,8 @@
 @import "../styles/routine.css";
 @import "../styles/info.css";
 @import "../styles/toolbarStyle.css";
+@import "../styles/formStyle.css";
+@import "../global/mainStyle.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
@@ -19,23 +21,6 @@
 
 body {
     background-color: black;
-}
-
-#sidebarsDiv {
-    display: flex;
-    flex-direction: row;
-    grid-gap: 20px;
-}
-
-.headline {
-    font-family: 'Bebas Neue', cursive;
-    color: var(--secondary-black);
-}
-
-#content {
-    display: flex;
-    flex-direction: column;
-    grid-gap: 20px;
 }
 
 /* Custom Scrollbar, yeah */

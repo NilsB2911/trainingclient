@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import "../global/globalStyle.css";
+import "../../global/globalStyle.css";
 
 class RoutineInfo extends Component {
     render() {

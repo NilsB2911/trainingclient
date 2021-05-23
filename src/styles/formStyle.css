@@ -1,0 +1,27 @@
+#registerTop, #loginTop{
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    grid-gap: 5vh;
+    padding: 5vh;
+    background-color: var(--primary-blue);
+}
+
+#positionRegisterMiddle, #positionLoginMiddle {
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type=text] {
+    height: 5ch;
+    border: none;
+    background-color: var(--secondary-black);
+    color: white;
+}
+
+input[type=text]:focus {
+    border: none;
+    border-radius: 0;
+}
