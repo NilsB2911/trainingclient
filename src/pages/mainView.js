@@ -3,11 +3,12 @@ import Camerabar from "../components/main/camerabar";
 import Sidebar from "../components/main/sidebar";
 import RoutineInfo from "../components/main/routineInfo";
 import ProgessBar from "../components/main/progessBar";
+import {AuthContext} from "../context/AuthContext";
 
 class MainView extends Component {
     render() {
         return (
-            <div>
+            <div id={"bossContainer"}>
                 <div id={"sidebarsDiv"}>
                     <Camerabar/>
                     <Sidebar/>
@@ -21,5 +22,6 @@ class MainView extends Component {
     }
 }
 
+MainView.contextType = AuthContext;
 
 export default MainView;

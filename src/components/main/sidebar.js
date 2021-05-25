@@ -100,7 +100,7 @@ class Sidebar extends Component {
 
 
         return (
-            <div id={"sidebarDiv"}>
+            <div id={"cardDiv"}>
                 {testArray.map(v => {
                     return (
                         <RoutineCard key={v.id * Math.random()} id={v.id} name={v.text} time={v.time}/>

@@ -1,9 +1,6 @@
-@import "../styles/barStyle.css";
-@import "../styles/routine.css";
-@import "../styles/info.css";
 @import "../styles/toolbarStyle.css";
 @import "../styles/formStyle.css";
-@import "../global/mainStyle.css";
+@import "../styles/mainStyle.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 

@@ -1,10 +1,10 @@
 #registerTop, #loginTop{
     display: flex;
     flex-direction: column;
-    width: 33%;
-    grid-gap: 5vh;
+    width: 20vw;
     padding: 5vh;
     background-color: var(--primary-blue);
+    border-radius: 20px;
 }
 
 #positionRegisterMiddle, #positionLoginMiddle {
@@ -17,11 +17,27 @@
 input[type=text] {
     height: 5ch;
     border: none;
-    background-color: var(--secondary-black);
+    background-color: var(--primary-black);
     color: white;
+    margin-bottom: 4vh;
 }
 
 input[type=text]:focus {
     border: none;
     border-radius: 0;
+}
+
+#registerTag {
+    margin-bottom: 7vh;
+}
+
+.bebas {
+    font-family: 'Bebas Neue', cursive;
+}
+
+.loginRegisterButton {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.3rem;
+    height: 5ch;
+    background-color: var(--secondary-black);
 }

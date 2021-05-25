@@ -3,3 +3,20 @@
     height: 5vh;
     background-color: var(--primary-blue);
 }
+
+.linkClass {
+    text-decoration: none;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.2rem;
+    color: var(--primary-black);
+}
+
+#floatRight {
+    width: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    grid-gap: 20px;
+    align-items: center;
+    justify-content: center;
+}

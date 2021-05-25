@@ -9,7 +9,7 @@ export default function SubmitRegister(props) {
             try {
                 await app.auth().createUserWithEmailAndPassword(props.email, props.password);
                 let user = app.auth().currentUser;
-                console.log(user.uid);
+                console.log(user.uid)
                 history.push("/");
             } catch (error) {
                 console.log(error);
@@ -18,7 +18,7 @@ export default function SubmitRegister(props) {
 
     return (
         <>
-            <Button disabled={!(props.password === props.confirmPassword && props.password !== "" && props.confirmPassword !== "")} onClick={submitToFirebase}>Submit</Button>
+            <Button className={"loginRegisterButton"} disabled={!(props.password === props.confirmPassword && props.password !== "" && props.confirmPassword !== "")} onClick={submitToFirebase}>Submit</Button>
         </>
     )
 }

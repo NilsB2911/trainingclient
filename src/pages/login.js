@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SubmitLogin from "../components/functionComponents/submitLogin";
+import {AuthContext} from "../context/AuthContext";
 
 class Login extends Component {
     constructor() {
@@ -18,14 +19,19 @@ class Login extends Component {
     };
 
     render() {
+        let user = this.context.currentUser
         return (
             <div id={"positionLoginMiddle"}>
+                {user ? <p style={{color: "white"}}>{this.context.currentUser.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
                 <div id={"loginTop"}>
+                    <h2 id={"registerTag"} className={"bebas"}>Login</h2>
+                    <p className={"bebas"}>Email</p>
                     <input
                         type="text"
                         value={this.state.email}
                         onChange={this.handleEmail}
                     />
+                    <p className={"bebas"}>Password</p>
                     <input
                         type="text"
                         value={this.state.pw}
@@ -38,5 +44,7 @@ class Login extends Component {
         );
     }
 }
+
+Login.contextType = AuthContext;
 
 export default Login;

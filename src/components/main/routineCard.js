@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import "../../styles/routine.css"
 
 class RoutineCard extends Component {
     constructor(props) {

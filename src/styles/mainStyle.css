@@ -1,0 +1,52 @@
+#sidebarsDiv {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 20px;
+}
+
+.headline {
+    font-family: 'Bebas Neue', cursive;
+    color: var(--secondary-black);
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 20px;
+}
+
+#cardDiv {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    height: 93vh;
+    background-color: var(--primary-black);
+    padding: 1vh;
+    overflow-y: scroll;
+}
+
+#cameraBar {
+    width: 20vw;
+    height: 93vh;
+    padding: 1vh;
+    background-color: var(--primary-black);
+}
+
+#infoBlock {
+    height: 80vh;
+    width: 80vh;
+    background-color: var(--primary-black);
+}
+
+#progress {
+    height: 10vh;
+    width: 80vh;
+    background-color: var(--secondary-blue);
+}
+
+.routineCard {
+    margin: 1vh;
+    padding: 2vh;
+    background-color: var(--primary-blue);
+    color: var(--primary-black);
+}
