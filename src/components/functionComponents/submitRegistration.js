@@ -5,6 +5,7 @@ import app from "../../global/firebase"
 
 export default function SubmitRegister(props) {
     let history = useHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const submitToFirebase = useCallback(async event => {
             try {
                 await app.auth().createUserWithEmailAndPassword(props.email, props.password);

@@ -6,6 +6,7 @@ import React, { useCallback } from 'react';
 export default function SubmitLogin(props) {
     let history = useHistory();
     let correct = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const loginToFirebase = useCallback(async event => {
         try {
             await app.auth().signInWithEmailAndPassword(props.email, props.password);

@@ -14,17 +14,12 @@
     justify-content: center;
 }
 
-input[type=text] {
+.formInput {
     height: 5ch;
     border: none;
     background-color: var(--primary-black);
     color: white;
     margin-bottom: 4vh;
-}
-
-input[type=text]:focus {
-    border: none;
-    border-radius: 0;
 }
 
 #registerTag {

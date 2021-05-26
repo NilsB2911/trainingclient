@@ -5,6 +5,7 @@ import React, { useCallback } from 'react';
 
 export default function Logout(props) {
     let history = useHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const logUserOut = useCallback(async event => {
         try {
             let user = app.auth().currentUser;

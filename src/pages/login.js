@@ -27,12 +27,14 @@ class Login extends Component {
                     <h2 id={"registerTag"} className={"bebas"}>Login</h2>
                     <p className={"bebas"}>Email</p>
                     <input
+                        className={"formInput"}
                         type="text"
                         value={this.state.email}
                         onChange={this.handleEmail}
                     />
                     <p className={"bebas"}>Password</p>
                     <input
+                        className={"formInput"}
                         type="text"
                         value={this.state.pw}
                         onChange={this.handlePw}
