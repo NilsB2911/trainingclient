@@ -12,6 +12,7 @@ class Toolbar extends Component {
                     {user ? <p>{this.context.currentUser.uid}</p> : <p>Not logged in</p>}
                     {user ? null : <Link to={"/register"} className={"linkClass"}>Registrieren</Link>}
                     {user ? <Logout/> : <Link to={"/login"} className={"linkClass"}>Login</Link>}
+                    <Link to={user ? "/select" : "/login"} className={"linkClass"}>Select Workout</Link>
                     <Link to={user ? "/create" : "/login"} className={"linkClass"}>Create Workout</Link>
                 </div>
             </div>

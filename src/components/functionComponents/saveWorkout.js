@@ -15,6 +15,7 @@ export default function SaveWorkout(props) {
             history.push("/login")
         }
         console.log(response);
+        history.push("/");
     }
 
     return (
