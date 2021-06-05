@@ -1,23 +1,16 @@
-import app from "../../global/firebase";
 import {Button} from "semantic-ui-react";
 import {useHistory} from "react-router-dom"
-import React, { useCallback } from 'react';
+import React, {useContext} from 'react';
+import {AuthContext} from "../../context/AuthContext";
 
 export default function Logout(props) {
     let history = useHistory();
+    let {setUser} = useContext(AuthContext)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const logUserOut = useCallback(async event => {
-        try {
-            let user = app.auth().currentUser;
-            console.log("logout" + user.uid);
-            await app.auth().signOut();
-            console.log("logged out");
-            history.push("/");
-        } catch (error) {
-            console.log(error)
-        }
-        console.log(app.auth().currentUser);
-    })
+    const logUserOut = () => {
+        setUser(null);
+        history.push("/login")
+    }
 
     return (
         <>

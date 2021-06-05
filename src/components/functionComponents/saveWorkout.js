@@ -5,12 +5,11 @@ export default function SaveWorkout(props) {
     let history = useHistory();
 
     const callApiNewWorkout = async () => {
-        let user = props.currentUser;
         let response;
-        if (user) {
-            let url = 'http://localhost:3001/training/submit/' + props.workoutName + "/" + JSON.stringify(props.workoutSteps) + "/" + props.overallTime + "/" + props.currentUser.uid;
+        if (props.currentUser !== "" && props.currentUser !== null && props.currentUser !== undefined) {
+            let url = 'http://localhost:3001/training/submit/' + props.workoutName + "/" + JSON.stringify(props.workoutSteps) + "/" + props.overallTime + "/" + props.currentUser;
             console.log(url);
-            response = await fetch(url)
+            response = await fetch(url, {method: 'post'});
         } else {
             history.push("/login")
         }

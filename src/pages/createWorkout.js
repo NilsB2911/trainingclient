@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {AuthContext} from "../context/AuthContext";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import SaveWorkout from "../components/functionComponents/saveWorkout";
+import {Input} from "semantic-ui-react";
 
 class CreateWorkout extends Component {
 
@@ -9,21 +10,23 @@ class CreateWorkout extends Component {
         super();
         this.state = {
             workoutName: "",
-            overallTime: 0,
+            overallTime: undefined,
             workoutSteps: [
                 {
                     id: 0,
                     name: "",
-                    duration: 0
+                    duration: undefined
                 }
             ]
         }
     }
 
     render() {
+        let user = this.context.user
         console.log(this.state.workoutSteps);
         return (
             <div id={"centerCreate"}>
+                {user ? <p style={{color: "white"}}>{user.json.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
                 <input type={"text"} placeholder={"Give your workout a descriptive name"} value={this.state.workoutName}
                        onChange={this.handleName}/>
                 <div id={"topWrapper"}>
@@ -39,17 +42,34 @@ class CreateWorkout extends Component {
                                                         <div className={"draggableDiv"}>
                                                             <p style={{color: "white"}}
                                                                className={"bebas"}>Übung {index + 1}</p>
-                                                            <input id={step.id + "N"} type={"text"}
+                                                            <Input
+                                                                id={step.id + "N"}
+                                                                control={"input"}
+                                                                type={"text"}
+                                                                label={"Exercise"}
+                                                                onChange={(e) => this.handleInput(e, index)}
+                                                                value={this.state.workoutSteps[index].name}
+                                                            />
+                                                            <Input
+                                                                id={step.id + "D"}
+                                                                control={"input"}
+                                                                type={"number"}
+                                                                label={"Duration"}
+                                                                onChange={(e) => this.handleInput(e, index)}
+                                                                value={this.state.workoutSteps[index].duration}
+                                                            />
+                                                            {/*<input id={step.id + "N"} type={"text"}
                                                                    className={"workoutInput"}
                                                                    placeholder={step.id + "N"}
                                                                    value={this.state.workoutSteps[index].name}
                                                                    onChange={(e) => this.handleInput(e, index)}/>
+
                                                             <input id={step.id + "D"} type={"text"}
                                                                    className={"workoutInput"}
                                                                    placeholder={step.id + "D"}
                                                                    value={this.state.workoutSteps[index].duration}
-                                                                   onChange={(e) => this.handleInput(e, index)}/>
-                                                            <div {...provided.dragHandleProps}>DRAGME</div>
+                                                                   onChange={(e) => this.handleInput(e, index)}/>*/}
+                                                            <span className={"material-icons"} {...provided.dragHandleProps}>reorder</span>
                                                         </div>
                                                     </div>
                                                 )}
@@ -65,7 +85,7 @@ class CreateWorkout extends Component {
                 <button onClick={this.pushToArray}>Add Step</button>
                 <p className={"bebas"} style={{color: "white"}}>{this.state.overallTime}</p>
                 <SaveWorkout workoutName={this.state.workoutName} workoutSteps={this.state.workoutSteps}
-                             overallTime={this.state.overallTime} currentUser={this.context.currentUser}/>
+                             overallTime={this.state.overallTime} currentUser={this.context.user.json.uid}/>
             </div>
         );
     }
@@ -89,7 +109,13 @@ class CreateWorkout extends Component {
         console.log(index);
         let {id, value} = e.target;
         //let filterId = id.substring(0, id.length - 1);
-        let selectorId = id.substring(1);
+        let selectorId
+        if(index < 10) {
+            selectorId = id.substring(1);
+        } else {
+            selectorId = id.substring(2);
+        }
+
 
         let tempArray = [...this.state.workoutSteps];
         let item = tempArray[index];
@@ -97,9 +123,7 @@ class CreateWorkout extends Component {
         if (selectorId === "N") {
             item.name = value;
         } else if (selectorId === "D") {
-            value = parseInt(value);
-            isNaN(value) ? value = 0 : console.log("NOT NAN " + value);
-            item.duration = value;
+            item.duration = parseInt(value);
         }
 
         tempArray[index] = item;

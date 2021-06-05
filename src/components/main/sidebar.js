@@ -1,114 +1,51 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../global/globalStyle.css";
 import RoutineCard from "./routineCard";
+import {useLocation} from "react-router";
 
-class Sidebar extends Component {
-    render() {
-
-        let testArray = [
+function Sidebar() {
+    const [woState, woSetState] = useState({
+        toDoArray: [
             {
                 id: 0,
-                text: "r1",
-                time: "10"
+                name: "lol",
+                duration: 60
             },
             {
-                id: 1,
-                text: "r2",
-                time: "5"
-            },
-            {
-                id: 2,
-                text: "r2",
-                time: "5"
-            },
-            {
-                id: 3,
-                text: "r2",
-                time: "10"
-            },
-            {
-                id: 4,
-                text: "r2",
-                time: "5"
-            },
-            {
-                id: 5,
-                text: "r2",
-                time: "10"
-            },
-            {
-                id: 6,
-                text: "r2",
-                time: "5"
-            },
-            {
-                id: 7,
-                text: "r2",
-                time: "5"
-            },
-            {
-                id: 8,
-                text: "r2",
-                time: "6"
-            },
-            {
-                id: 9,
-                text: "r1",
-                time: "10"
-            },
-            {
-                id: 10,
-                text: "r2",
-                time: "5"
-            },
-            {
-                id: 11,
-                text: "r2",
-                time: "5"
-            },
-            {
-                id: 12,
-                text: "r2",
-                time: "10"
-            },
-            {
-                id: 13,
-                text: "r2",
-                time: "5"
-            },
-            {
-                id: 14,
-                text: "r2",
-                time: "10"
-            },
-            {
-                id: 15,
-                text: "r2",
-                time: "5"
-            },
-            {
-                id: 16,
-                text: "r2",
-                time: "5"
-            },
-            {
-                id: 17,
-                text: "r2",
-                time: "6"
+                id: 0,
+                name: "lol",
+                duration: 60
             }
         ]
+    })
+    const [naState, naSetState] = useState({
+        name: "Kein Workout ausgewählt"
+    })
 
+    let location = useLocation();
 
-        return (
-            <div id={"cardDiv"}>
-                {testArray.map(v => {
-                    return (
-                        <RoutineCard key={v.id * Math.random()} id={v.id} name={v.text} time={v.time}/>
-                    )
-                })}
-            </div>
-        );
-    }
+    useEffect(() => {
+        if (location.state) {
+            let jsonArray = JSON.parse(location.state.toDoWo.json);
+            woSetState({toDoArray: jsonArray})
+            naSetState({name: location.state.toDoWo.name})
+        } else {
+            console.log("keine props")
+        }
+        // eslint-disable-next-line
+    }, [location.state]);
+
+    return (
+        <div id={"cardDiv"}>
+            <p id={"woName"} className={"bebas"}>{naState.name}</p>
+            {woState.toDoArray.map((v, index) => {
+                return (
+                    <RoutineCard key={index} id={v.id} name={v.name} time={v.duration}/>
+                )
+            })}
+        </div>
+    );
+
 }
 
 export default Sidebar;

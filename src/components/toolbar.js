@@ -5,11 +5,12 @@ import {AuthContext} from "../context/AuthContext";
 
 class Toolbar extends Component {
     render() {
-        let user = this.context.currentUser
+        let user = this.context.user
+        console.log(this.context);
         return (
             <div id={"toolbarDiv"}>
                 <div id={"floatRight"}>
-                    {user ? <p>{this.context.currentUser.uid}</p> : <p>Not logged in</p>}
+                    {user ? <p>{user.json.uid}</p> : <p>Not logged in</p>}
                     {user ? null : <Link to={"/register"} className={"linkClass"}>Registrieren</Link>}
                     {user ? <Logout/> : <Link to={"/login"} className={"linkClass"}>Login</Link>}
                     <Link to={user ? "/select" : "/login"} className={"linkClass"}>Select Workout</Link>

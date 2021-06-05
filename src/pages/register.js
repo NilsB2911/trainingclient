@@ -8,7 +8,8 @@ class Register extends Component {
         this.state = {
             email: "",
             password: "",
-            confirmPassword: ""
+            confirmPassword: "",
+            name: ""
         }
     }
 
@@ -21,12 +22,15 @@ class Register extends Component {
     handleCpw = (e) => {
         this.setState({confirmPassword: e.target.value});
     };
+    handleName = (e) => {
+        this.setState({name: e.target.value});
+    };
 
     render() {
-        let user = this.context.currentUser;
+        let user = this.context.user;
         return (
             <div id={"positionRegisterMiddle"}>
-                {user ? <p style={{color: "white"}}>{this.context.currentUser.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
+                {user ? <p style={{color: "white"}}>{user.json.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
                 <div id={"registerTop"}>
                     <h2 id={"registerTag"} className={"bebas"}>Register</h2>
                     <p className={"bebas"}>Mail</p>
@@ -35,6 +39,12 @@ class Register extends Component {
                         type="text"
                         value={this.state.email}
                         onChange={this.handleMail}
+                    />
+                    <input
+                        className={"formInput"}
+                        type="text"
+                        value={this.state.name}
+                        onChange={this.handleName}
                     />
                     <p className={"bebas"}>Password</p>
                     <input
@@ -51,7 +61,7 @@ class Register extends Component {
                         onChange={this.handleCpw}
                     />
                     <SubmitRegister email={this.state.email} password={this.state.password}
-                                    confirmPassword={this.state.confirmPassword}/>
+                                    confirmPassword={this.state.confirmPassword} name={this.state.name}/>
                 </div>
             </div>
 

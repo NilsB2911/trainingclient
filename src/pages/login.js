@@ -19,10 +19,10 @@ class Login extends Component {
     };
 
     render() {
-        let user = this.context.currentUser
+        let user = this.context.user
         return (
             <div id={"positionLoginMiddle"}>
-                {user ? <p style={{color: "white"}}>{this.context.currentUser.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
+                {user ? <p style={{color: "white"}}>{user.json.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
                 <div id={"loginTop"}>
                     <h2 id={"registerTag"} className={"bebas"}>Login</h2>
                     <p className={"bebas"}>Email</p>
