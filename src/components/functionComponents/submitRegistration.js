@@ -1,16 +1,16 @@
-import React, {useContext} from 'react';
 import {Button} from "semantic-ui-react";
 import {useHistory} from "react-router-dom"
-import {AuthContext} from "../../context/AuthContext";
+import React from 'react';
+import store from "../../context/Store";
+import {toJS} from "mobx";
 
 export default function SubmitRegister(props) {
     let history = useHistory();
-    const { user, setUser} = useContext(AuthContext);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const createUser = async () => {
         console.log(props.email, props.password, props.name)
         await fetch("http://localhost:3001/user/register", {
-            method: 'POST',
+            method: 'post',
             headers: {
                 "Content-Type": "application/json"
             },
@@ -19,15 +19,12 @@ export default function SubmitRegister(props) {
                 pw: props.password,
                 name: props.name
             })
-        }).then(answer => answer.json()).then(json => setUser(json))
-
-        history.push("/")
-        console.log(user);
+        }).then(response => response.json()).then(json => store.setUser(json)).then(() => console.log("REGISTER " + toJS(store.user.uid))).then(() => history.push("/"))
     }
 
     return (
-        <>
+        <div>
             <Button className={"loginRegisterButton"} disabled={!(props.password === props.confirmPassword && props.password !== "" && props.confirmPassword !== "")} onClick={createUser}>Submit</Button>
-        </>
+        </div>
     )
 }

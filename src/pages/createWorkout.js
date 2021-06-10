@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {AuthContext} from "../context/AuthContext";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import SaveWorkout from "../components/functionComponents/saveWorkout";
 import {Input} from "semantic-ui-react";
+import {observer} from "mobx-react";
 
+import store from "../context/Store";
+
+@observer
 class CreateWorkout extends Component {
 
     constructor() {
@@ -22,11 +25,10 @@ class CreateWorkout extends Component {
     }
 
     render() {
-        let user = this.context.user
         console.log(this.state.workoutSteps);
         return (
             <div id={"centerCreate"}>
-                {user ? <p style={{color: "white"}}>{user.json.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
+                {store.user.uid ? <p style={{color: "white"}}>{store.user.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
                 <input type={"text"} placeholder={"Give your workout a descriptive name"} value={this.state.workoutName}
                        onChange={this.handleName}/>
                 <div id={"topWrapper"}>
@@ -85,7 +87,7 @@ class CreateWorkout extends Component {
                 <button onClick={this.pushToArray}>Add Step</button>
                 <p className={"bebas"} style={{color: "white"}}>{this.state.overallTime}</p>
                 <SaveWorkout workoutName={this.state.workoutName} workoutSteps={this.state.workoutSteps}
-                             overallTime={this.state.overallTime} currentUser={this.context.user.json.uid}/>
+                             overallTime={this.state.overallTime} currentUser={store.user.uid}/>
             </div>
         );
     }
@@ -145,7 +147,5 @@ class CreateWorkout extends Component {
         this.setState({overallTime: totalTime});
     }
 }
-
-CreateWorkout.contextType = AuthContext;
 
 export default CreateWorkout;

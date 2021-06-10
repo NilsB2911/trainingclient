@@ -1,26 +1,25 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import Logout from "./functionComponents/logout";
-import {AuthContext} from "../context/AuthContext";
+import { observer } from 'mobx-react';
 
+import store from "../context/Store";
+
+@observer
 class Toolbar extends Component {
     render() {
-        let user = this.context.user
-        console.log(this.context);
         return (
             <div id={"toolbarDiv"}>
+                <p style={{color: "white"}}>{store.user.uid}</p>
                 <div id={"floatRight"}>
-                    {user ? <p>{user.json.uid}</p> : <p>Not logged in</p>}
-                    {user ? null : <Link to={"/register"} className={"linkClass"}>Registrieren</Link>}
-                    {user ? <Logout/> : <Link to={"/login"} className={"linkClass"}>Login</Link>}
-                    <Link to={user ? "/select" : "/login"} className={"linkClass"}>Select Workout</Link>
-                    <Link to={user ? "/create" : "/login"} className={"linkClass"}>Create Workout</Link>
+                    {store.user.uid ? null : <Link to={"/register"} className={"linkClass"}>Registrieren</Link>}
+                    {store.user.uid ? <Logout/> : <Link to={"/login"} className={"linkClass"}>Login</Link>}
+                    <Link to={store.user.uid ? "/select" : "/login"} className={"linkClass"}>Select Workout</Link>
+                    <Link to={store.user.uid ? "/create" : "/login"} className={"linkClass"}>Create Workout</Link>
                 </div>
             </div>
         );
     }
 }
 
-Toolbar.contextType = AuthContext;
-
-export default Toolbar
+export default Toolbar;

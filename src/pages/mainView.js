@@ -3,15 +3,26 @@ import Camerabar from "../components/main/camerabar";
 import Sidebar from "../components/main/sidebar";
 import RoutineInfo from "../components/main/routineInfo";
 import ProgessBar from "../components/main/progessBar";
-import {AuthContext} from "../context/AuthContext";
 
 class MainView extends Component {
+    constructor() {
+        super();
+        this.state = {
+            activeDataSet: null
+        }
+    }
+
+    setActiveData = (data) => {
+        //this.setState({activeDataSet: data});
+        console.log(data);
+    }
+
     render() {
         return (
             <div id={"bossContainer"}>
                 <div id={"sidebarsDiv"}>
                     <Camerabar/>
-                    <Sidebar/>
+                    <Sidebar onSetActiveData={this.setActiveData}/>
                     <div id={"content"}>
                         <RoutineInfo/>
                         <ProgessBar/>
@@ -21,7 +32,5 @@ class MainView extends Component {
         );
     }
 }
-
-MainView.contextType = AuthContext;
 
 export default MainView;

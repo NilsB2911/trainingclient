@@ -1,47 +1,48 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {AuthContext} from "../context/AuthContext";
-import {useHistory} from "react-router-dom";
+import React, {Component} from 'react';
 
-const SelectWorkout = () => {
-    const [state, setState] = useState({
-        allUserWorkouts: undefined,
-        selectedWorkout: undefined
-    })
+import store from "../context/Store";
+import {observer} from "mobx-react";
 
-    const context = useContext(AuthContext);
-    const history = useHistory();
+@observer
+class SelectWorkout extends Component {
+    componentDidMount() {
+        this.callWorkouts()
+    }
 
-    /* eslint-disable */
-    useEffect(() => {
-        callWorkouts()
-    }, [state.selectedWorkout]);
     /* eslint-enable */
-    function updateSelected(wo) {
+    updateSelected = (wo) => {
         console.log("CALLED");
-        setState({selectedWorkout: wo});
-        history.push('/', {toDoWo: wo})
+        store.setSelectedWorkout({
+            json: JSON.parse(wo.json),
+            name: wo.name,
+            time: wo.time
+        })
+        this.props.history.push("/");
     }
 
-    async function callWorkouts() {
-        let queryString = "http://localhost:3001/training/get/" + context.user.json.uid;
-        await fetch(queryString).then(response => response.json()).then(json => setState({allUserWorkouts: json}));
+    callWorkouts = async () => {
+        let queryString = "http://localhost:3001/training/get/" + store.user.uid;
+        await fetch(queryString).then(response => response.json()).then(json => store.fetchWorkouts(json));
     }
 
-    let user = context.user
-    return (
-        <div>
-            {user ? <p style={{color: "white"}}>{user.json.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
-            {state.allUserWorkouts ? state.allUserWorkouts.map((wo, index) => {
-                return (
-                    <div className={"routineCard headline mouseHover"} onClick={() => updateSelected(wo)} key={index}>
-                        <p>{wo.name}</p>
-                        <p>{wo.time}</p>
-                        <p>{wo.json}</p>
-                    </div>
-                )
-            }) : <p style={{color: "white"}}>loading</p>}
-        </div>
-    );
+    render() {
+        let user = store.user.uid
+        return (
+            <div>
+                {user ? <p style={{color: "white"}}>{user}</p> : <p style={{color: "white"}}>Not logged in</p>}
+                {store.allWorkouts ? store.allWorkouts.map((wo, index) => {
+                    return (
+                        <div className={"routineCard headline mouseHover"} onClick={() => this.updateSelected(wo)}
+                             key={index}>
+                            <p>{wo.name}</p>
+                            <p>{wo.time}</p>
+                            <p>{wo.json}</p>
+                        </div>
+                    )
+                }) : <p style={{color: "white"}}>loading</p>}
+            </div>
+        );
+    }
 }
 
 export default SelectWorkout;

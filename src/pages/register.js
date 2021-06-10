@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import SubmitRegister from "../components/functionComponents/submitRegistration";
-import {AuthContext} from "../context/AuthContext";
+import {observer} from "mobx-react";
 
+import store from "../context/Store";
+
+@observer
 class Register extends Component {
     constructor() {
         super();
@@ -27,10 +30,9 @@ class Register extends Component {
     };
 
     render() {
-        let user = this.context.user;
         return (
             <div id={"positionRegisterMiddle"}>
-                {user ? <p style={{color: "white"}}>{user.json.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
+                {store.user.uid ? <p style={{color: "white"}}>{store.user.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
                 <div id={"registerTop"}>
                     <h2 id={"registerTag"} className={"bebas"}>Register</h2>
                     <p className={"bebas"}>Mail</p>
@@ -68,7 +70,5 @@ class Register extends Component {
         );
     }
 }
-
-Register.contextType = AuthContext
 
 export default Register;
