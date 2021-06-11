@@ -12,7 +12,7 @@ class Store {
             allWorkouts: observable,
             selectedWorkout: observable,
             currentStep: observable,
-            setUser: action
+            setUser: action,
         })
     }
 
@@ -25,7 +25,7 @@ class Store {
     allWorkouts = []
 
     selectedWorkout = {
-        json: [{}],
+        json: null,
         name: null,
         time: null
     }
@@ -36,8 +36,6 @@ class Store {
         this.selectedWorkout.json = workout.json;
         this.selectedWorkout.name = workout.name;
         this.selectedWorkout.time = workout.time;
-
-        console.log(this.selectedWorkout);
     }
 
     fetchWorkouts(workouts) {
@@ -46,8 +44,8 @@ class Store {
 
     setUser(newUser) {
         this.user = newUser;
+        console.log(this.user);
     }
-
 }
 
 let store = new Store();

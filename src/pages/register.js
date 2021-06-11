@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import SubmitRegister from "../components/functionComponents/submitRegistration";
 import {observer} from "mobx-react";
+import {Input} from "semantic-ui-react";
 
-import store from "../context/Store";
 
 @observer
 class Register extends Component {
@@ -32,32 +32,28 @@ class Register extends Component {
     render() {
         return (
             <div id={"positionRegisterMiddle"}>
-                {store.user.uid ? <p style={{color: "white"}}>{store.user.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
                 <div id={"registerTop"}>
                     <h2 id={"registerTag"} className={"bebas"}>Register</h2>
-                    <p className={"bebas"}>Mail</p>
-                    <input
-                        className={"formInput"}
+                    <Input
+                        label={"Mail"}
                         type="text"
                         value={this.state.email}
                         onChange={this.handleMail}
                     />
-                    <input
-                        className={"formInput"}
+                    <Input
+                        label={"Name"}
                         type="text"
                         value={this.state.name}
                         onChange={this.handleName}
                     />
-                    <p className={"bebas"}>Password</p>
-                    <input
-                        className={"formInput"}
+                    <Input
+                        label={"Password"}
                         type="text"
                         value={this.state.password}
                         onChange={this.handlePw}
                     />
-                    <p className={"bebas"}>Repeat password</p>
-                    <input
-                        className={"formInput"}
+                    <Input
+                        label={"Confirm Password"}
                         type="text"
                         value={this.state.confirmPassword}
                         onChange={this.handleCpw}

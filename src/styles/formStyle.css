@@ -29,10 +29,3 @@
 .bebas {
     font-family: 'Bebas Neue', cursive;
 }
-
-.loginRegisterButton {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 1.3rem;
-    height: 5ch;
-    background-color: var(--secondary-black);
-}

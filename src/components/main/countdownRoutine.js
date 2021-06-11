@@ -7,7 +7,7 @@ import Countdown from 'react-countdown';
 import store from "../../context/Store";
 
 @observer
-class RoutineInfo extends Component {
+class CountdownRoutine extends Component {
     constructor() {
         super();
         this.state = {
@@ -16,7 +16,6 @@ class RoutineInfo extends Component {
     }
 
     incrementStore = () => {
-        console.log(store.selectedWorkout.json.length)
         if (store.currentStep < store.selectedWorkout.json.length - 1) {
             setTimeout(function () {
                 store.currentStep += 1;
@@ -26,8 +25,18 @@ class RoutineInfo extends Component {
         }
     }
 
+    countdownRenderer = ({ hours, minutes, seconds, completed }) => {
+        let minuteString = minutes < 10 ? "0" + String(minutes) : minutes;
+        let secondString = seconds < 10 ? "0" + String(seconds) : seconds;
+
+        return(
+            <div id={"countdownRenderer"}>
+                <h4>{minuteString}:{secondString}</h4>
+            </div>
+        )
+    }
+
     render() {
-        console.log(store.selectedWorkout.time);
         return (
             <div id={"infoBlock"} className={"headline"}>
                 {store.selectedWorkout.name ?
@@ -37,11 +46,11 @@ class RoutineInfo extends Component {
                             <Countdown
                                 date={Date.now() + store.selectedWorkout.json[store.currentStep].duration * 1000}
                                 onComplete={this.incrementStore}
-                                key={store.currentStep}/> : <p>DONE</p>}
+                                key={store.currentStep} renderer={this.countdownRenderer}/> : <p>DONE</p>}
                     </div> : <p>None selected</p>
                 }</div>
         );
     }
 }
 
-export default RoutineInfo;
+export default CountdownRoutine;

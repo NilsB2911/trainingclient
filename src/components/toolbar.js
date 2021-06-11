@@ -1,23 +1,34 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import Logout from "./functionComponents/logout";
-import { observer } from 'mobx-react';
+import {observer} from 'mobx-react';
 
 import store from "../context/Store";
+import Logout from "./functionComponents/logout";
 
 @observer
 class Toolbar extends Component {
     render() {
         return (
-            <div id={"toolbarDiv"}>
-                <p style={{color: "white"}}>{store.user.uid}</p>
-                <div id={"floatRight"}>
-                    {store.user.uid ? null : <Link to={"/register"} className={"linkClass"}>Registrieren</Link>}
-                    {store.user.uid ? <Logout/> : <Link to={"/login"} className={"linkClass"}>Login</Link>}
-                    <Link to={store.user.uid ? "/select" : "/login"} className={"linkClass"}>Select Workout</Link>
-                    <Link to={store.user.uid ? "/create" : "/login"} className={"linkClass"}>Create Workout</Link>
+            <div id={"wrapper"}>
+                <div id={"toolbarDiv"}>
+                    <Link to={"/"} className={"linkClass"} id={"home"}>Train with me</Link>
+                    {store.user.uid ?
+                        <div id={"floatRight"}>
+                            <Link to={"/select"} className={"linkClass"}>Select Workout</Link>
+                            <Link to={"/create"} className={"linkClass"}>Create Workout</Link>
+                        </div>
+                        :
+                        <div id={"floatRight"}>
+                            {<Link to={"/register"} className={"linkClass"}>Registrieren</Link>}
+                            {<Link to={"/login"} className={"linkClass"}>Login</Link>}
+                        </div>
+                    }
+                    <div id={"alignLogoutRight"}>
+                        <Logout id={"loginButtonPosition"}/>
+                    </div>
                 </div>
             </div>
+
         );
     }
 }

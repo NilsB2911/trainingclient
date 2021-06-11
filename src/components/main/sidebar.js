@@ -11,12 +11,12 @@ class Sidebar extends Component {
         return (
             <div id={"cardDiv"}>
                 <p id={"woName"} className={"bebas"}>{store.selectedWorkout.name}</p>
-                {store.selectedWorkout.json.map((v, index) => {
+                {store.selectedWorkout.json ? store.selectedWorkout.json.map((v, index) => {
                     return (
                         <RoutineCard key={index} id={v.id} name={v.name} time={v.duration}
                                      isSame={index === store.currentStep}/>
                     )
-                })}
+                }) : null}
             </div>
         );
     }

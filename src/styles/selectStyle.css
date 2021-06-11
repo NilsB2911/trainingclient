@@ -1,3 +1,12 @@
 .mouseHover :hover {
     cursor: pointer;
 }
+
+.selectCard {
+    padding: 2vh;
+    margin-bottom: 1vh;
+    width: 33%;
+    height: auto;
+    background-color: var(--secondary-black);
+    color: var(--primary-black);
+}

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import SaveWorkout from "../components/functionComponents/saveWorkout";
-import {Input} from "semantic-ui-react";
+import {Input, Button} from "semantic-ui-react";
 import {observer} from "mobx-react";
 
 import store from "../context/Store";
@@ -25,11 +25,9 @@ class CreateWorkout extends Component {
     }
 
     render() {
-        console.log(this.state.workoutSteps);
         return (
             <div id={"centerCreate"}>
-                {store.user.uid ? <p style={{color: "white"}}>{store.user.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
-                <input type={"text"} placeholder={"Give your workout a descriptive name"} value={this.state.workoutName}
+                <Input type={"text"} placeholder={"Give your workout a descriptive name"} value={this.state.workoutName}
                        onChange={this.handleName}/>
                 <div id={"topWrapper"}>
                     <DragDropContext onDragEnd={this.handleDragEnd}>
@@ -42,8 +40,7 @@ class CreateWorkout extends Component {
                                                 {(provided) => (
                                                     <div {...provided.draggableProps} ref={provided.innerRef}>
                                                         <div className={"draggableDiv"}>
-                                                            <p style={{color: "white"}}
-                                                               className={"bebas"}>Übung {index + 1}</p>
+                                                            <p className={"bebas listSteps"}>Übung {index + 1}</p>
                                                             <Input
                                                                 id={step.id + "N"}
                                                                 control={"input"}
@@ -60,18 +57,13 @@ class CreateWorkout extends Component {
                                                                 onChange={(e) => this.handleInput(e, index)}
                                                                 value={this.state.workoutSteps[index].duration}
                                                             />
-                                                            {/*<input id={step.id + "N"} type={"text"}
-                                                                   className={"workoutInput"}
-                                                                   placeholder={step.id + "N"}
-                                                                   value={this.state.workoutSteps[index].name}
-                                                                   onChange={(e) => this.handleInput(e, index)}/>
+                                                            <div id={"handles"}>
+                                                                <span className={"material-icons"}
+                                                                      onClick={(e, index) => this.deleteStep(e, index)} id={"deleteHandles"}>delete</span>
+                                                                <span
+                                                                    className={"material-icons"} {...provided.dragHandleProps}>reorder</span>
+                                                            </div>
 
-                                                            <input id={step.id + "D"} type={"text"}
-                                                                   className={"workoutInput"}
-                                                                   placeholder={step.id + "D"}
-                                                                   value={this.state.workoutSteps[index].duration}
-                                                                   onChange={(e) => this.handleInput(e, index)}/>*/}
-                                                            <span className={"material-icons"} {...provided.dragHandleProps}>reorder</span>
                                                         </div>
                                                     </div>
                                                 )}
@@ -84,12 +76,19 @@ class CreateWorkout extends Component {
                         </Droppable>
                     </DragDropContext>
                 </div>
-                <button onClick={this.pushToArray}>Add Step</button>
-                <p className={"bebas"} style={{color: "white"}}>{this.state.overallTime}</p>
+                <Button secondary onClick={this.pushToArray}>Add Step</Button>
+                <p className={"bebas"} id={"overallTime"}>Total workout time: {this.state.overallTime}</p>
                 <SaveWorkout workoutName={this.state.workoutName} workoutSteps={this.state.workoutSteps}
                              overallTime={this.state.overallTime} currentUser={store.user.uid}/>
             </div>
         );
+    }
+
+    //TODO: fix
+    deleteStep = (e, index) => {
+        let newArray = [...this.state.workoutSteps]
+        newArray.splice(index, 1);
+        this.setState({workoutSteps: newArray});
     }
 
     handleDragEnd = e => {
@@ -97,7 +96,6 @@ class CreateWorkout extends Component {
         const copyArray = Array.from(this.state.workoutSteps);
         const [movedStep] = copyArray.splice(e.source.index, 1);
 
-        //console.log(movedStep.id, e.destination.index);
         copyArray.splice(e.destination.index, 0, movedStep);
 
         this.setState({workoutSteps: copyArray});
@@ -108,11 +106,10 @@ class CreateWorkout extends Component {
     }
 
     handleInput = (e, index) => {
-        console.log(index);
         let {id, value} = e.target;
         //let filterId = id.substring(0, id.length - 1);
         let selectorId
-        if(index < 10) {
+        if (index < 10) {
             selectorId = id.substring(1);
         } else {
             selectorId = id.substring(2);
@@ -135,7 +132,6 @@ class CreateWorkout extends Component {
 
     pushToArray = () => {
         let newStep = {id: this.state.workoutSteps.length, name: "", duration: ""};
-        console.log("called");
         this.setState({workoutSteps: [...this.state.workoutSteps, newStep]});
     }
 

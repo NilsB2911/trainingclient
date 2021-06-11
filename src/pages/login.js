@@ -22,7 +22,6 @@ class Login extends Component {
     render() {
         return (
             <div id={"positionLoginMiddle"}>
-                {store.user.uid ? <p style={{color: "white"}}>{store.user.uid}</p> : <p style={{color: "white"}}>Not logged in</p>}
                 <div id={"loginTop"}>
                     <h2 id={"registerTag"} className={"bebas"}>Login</h2>
                     <p className={"bebas"}>Email</p>

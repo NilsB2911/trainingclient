@@ -18,7 +18,7 @@ export default function SaveWorkout(props) {
                     duration: props.overallTime,
                     userId: props.currentUser
                 })
-            }).then(answer => answer.json()).then(json => console.log(json)).then(() => history.push("/select"));
+            }).then(answer => answer.json()).then(() => history.push("/select"));
         } else {
             history.push("/login")
         }
@@ -26,7 +26,7 @@ export default function SaveWorkout(props) {
 
     return (
         <div>
-            <Button className={"loginRegisterButton"} onClick={callApiNewWorkout}>Submit</Button>
+            <Button primary onClick={callApiNewWorkout}>Submit</Button>
         </div>
     )
 }

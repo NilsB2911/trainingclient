@@ -3,6 +3,7 @@
 @import "../styles/mainStyle.css";
 @import "../styles/workoutStyle.css";
 @import "../styles/selectStyle.css";
+@import "../styles/countdownStyle.css";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
@@ -10,8 +11,8 @@
 :root {
     --primary-blue: #4AE4C5;
     --secondary-blue: #145f50;
-    --primary-black: #0F0F0F;
-    --secondary-black: #616161;
+    --primary-black: #393939;
+    --secondary-black: #898b8b;
 }
 
 * {
@@ -20,7 +21,7 @@
 }
 
 body {
-    background-color: black;
+    background: black;
 }
 
 /* Custom Scrollbar, yeah */

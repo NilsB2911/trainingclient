@@ -11,7 +11,6 @@ class SelectWorkout extends Component {
 
     /* eslint-enable */
     updateSelected = (wo) => {
-        console.log("CALLED");
         store.setSelectedWorkout({
             json: JSON.parse(wo.json),
             name: wo.name,
@@ -26,17 +25,14 @@ class SelectWorkout extends Component {
     }
 
     render() {
-        let user = store.user.uid
         return (
             <div>
-                {user ? <p style={{color: "white"}}>{user}</p> : <p style={{color: "white"}}>Not logged in</p>}
                 {store.allWorkouts ? store.allWorkouts.map((wo, index) => {
                     return (
-                        <div className={"routineCard headline mouseHover"} onClick={() => this.updateSelected(wo)}
+                        <div className={"selectCard headline mouseHover"} onClick={() => this.updateSelected(wo)}
                              key={index}>
                             <p>{wo.name}</p>
                             <p>{wo.time}</p>
-                            <p>{wo.json}</p>
                         </div>
                     )
                 }) : <p style={{color: "white"}}>loading</p>}

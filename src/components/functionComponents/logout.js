@@ -18,7 +18,7 @@ export default function Logout(props) {
 
     return (
         <div>
-            <Button onClick={logUserOut}>Logout</Button>
+            <Button secondary onClick={logUserOut}>Logout</Button>
         </div>
     )
 }
