@@ -1,15 +1,28 @@
 import 'semantic-ui-css/semantic.min.css';
 import "./global/globalStyle.css"
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, useHistory} from "react-router-dom";
 import MainView from "./pages/mainView";
 import Register from "./pages/register";
 import Toolbar from "./components/toolbar";
 import Login from "./pages/login";
 import CreateWorkout from "./pages/createWorkout";
 import SelectWorkout from "./pages/selectWorkout";
+import store from "./context/Store";
+import {useEffect} from "react";
 
 function App() {
-
+    useEffect(() => {
+        async function fetchData() {
+            await fetch("http://localhost:3001/user/tokenLogin", {
+                method: 'post',
+                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(response => response.json()).then(json => store.setUser(json))
+        }
+       fetchData()
+    }, [])
     return (
         <div className="App">
             {/* eslint-disable-next-line react/jsx-pascal-case */}
@@ -24,5 +37,6 @@ function App() {
         </div>
     );
 }
+
 
 export default App;

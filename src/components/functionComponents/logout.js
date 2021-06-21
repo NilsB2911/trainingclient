@@ -7,13 +7,12 @@ import store from "../../context/Store";
 export default function Logout(props) {
     let history = useHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const logUserOut = () => {
-        store.setUser({
-            uid: null,
-            email: null,
-            name: null
-        });
-        history.push("/login")
+    const logUserOut = async () => {
+        await fetch("http://localhost:3001/user/logout", {
+            method: 'post',
+            credentials: 'include'
+        }).then(res => res.json()).then(() => store.setUser({uid: null, name: null, email: null})).then(() => history.push("/"));
+        store.currentStep = 0;
     }
 
     return (

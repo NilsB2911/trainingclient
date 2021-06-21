@@ -30,14 +30,6 @@
     grid-gap: 2vh;
 }
 
-#progress {
-    border-radius: 5px;
-    height: 5vh;
-    width: 100%;
-    background-color: transparent;
-    border: 2px solid var(--primary-blue);
-}
-
 #infoBlock {
     padding: 1vh;
     border-radius: 5px;

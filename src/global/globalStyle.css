@@ -4,6 +4,7 @@
 @import "../styles/workoutStyle.css";
 @import "../styles/selectStyle.css";
 @import "../styles/countdownStyle.css";
+@import "../styles/progressStyle.css";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
@@ -36,7 +37,6 @@ body {
     border-radius: 5px;
     margin: 2vh 0;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: var(--secondary-blue);

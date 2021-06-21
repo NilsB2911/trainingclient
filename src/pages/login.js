@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import SubmitLogin from "../components/functionComponents/submitLogin";
-
 import store from "../context/Store";
 
 class Login extends Component {

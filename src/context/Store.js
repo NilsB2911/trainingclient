@@ -13,6 +13,10 @@ class Store {
             selectedWorkout: observable,
             currentStep: observable,
             setUser: action,
+            setStep: action,
+            elapsedTime: observable,
+            incrementElapsedTime: action,
+            zeroElapsedTime: action
         })
     }
 
@@ -31,6 +35,20 @@ class Store {
     }
 
     currentStep = 0
+
+    elapsedTime = 0
+
+    zeroElapsedTime() {
+        this.elapsedTime = 0
+    }
+
+    incrementElapsedTime(addition) {
+        this.elapsedTime += addition;
+    }
+
+    setStep(index) {
+        this.currentStep = index;
+    }
 
     setSelectedWorkout(workout) {
         this.selectedWorkout.json = workout.json;

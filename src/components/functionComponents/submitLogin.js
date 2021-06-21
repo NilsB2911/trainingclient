@@ -4,7 +4,6 @@ import React from 'react';
 
 import store from "../../context/Store";
 
-import jwtDecode from "jwt-decode";
 
 export default function SubmitLogin(props) {
     let correct = true;
@@ -21,7 +20,7 @@ export default function SubmitLogin(props) {
                 email: props.email,
                 pw: props.password,
             })
-        }).then(response => response.json()).then(json => store.setUser(jwtDecode(json.token))).then(() => history.push("/"))
+        }).then(response => response.json()).then(json => store.setUser(json)).then(() => history.push("/"))
     }
 
     return (

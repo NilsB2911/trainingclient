@@ -26,16 +26,19 @@ class SelectWorkout extends Component {
 
     render() {
         return (
-            <div>
-                {store.allWorkouts ? store.allWorkouts.map((wo, index) => {
-                    return (
-                        <div className={"selectCard headline mouseHover"} onClick={() => this.updateSelected(wo)}
-                             key={index}>
-                            <p>{wo.name}</p>
-                            <p>{wo.time}</p>
-                        </div>
-                    )
-                }) : <p style={{color: "white"}}>loading</p>}
+            <div id={"setPosition"}>
+                <p className={"bebas"} id={"selectHeader"}>Select your workout</p>
+                <div id={"centerSelectionContent"}>
+                    {store.allWorkouts ? store.allWorkouts.map((wo, index) => {
+                        return (
+                            <div className={"selectCard headline mouseHover"} onClick={() => this.updateSelected(wo)}
+                                 key={index}>
+                                <p>{wo.name}</p>
+                                <p>{wo.time}</p>
+                            </div>
+                        )
+                    }) : <p style={{color: "white"}}>loading</p>}
+                </div>
             </div>
         );
     }

@@ -4,9 +4,36 @@
 
 .selectCard {
     padding: 2vh;
-    margin-bottom: 1vh;
-    width: 33%;
+    width: 100%;
     height: auto;
+    background-color: var(--primary-black);
+    color: var(--primary-blue);
+    border-radius: 5px;
+}
+
+#centerSelectionContent {
     background-color: var(--secondary-black);
-    color: var(--primary-black);
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1vh;
+    align-items: center;
+    padding: 2vh;
+    border-radius: 5px;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+}
+
+#setPosition {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 33%;
+    height: 75vh;
+}
+
+#selectHeader {
+    color: var(--primary-blue);
+    font-size: 2rem;
 }

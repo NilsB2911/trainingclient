@@ -23,9 +23,12 @@ class Toolbar extends Component {
                             {<Link to={"/login"} className={"linkClass"}>Login</Link>}
                         </div>
                     }
-                    <div id={"alignLogoutRight"}>
-                        <Logout id={"loginButtonPosition"}/>
-                    </div>
+                    {store.user.uid ?
+                        <div id={"alignLogoutRight"}>
+                            <Logout id={"loginButtonPosition"}/>
+                        </div> :
+                        null}
+
                 </div>
             </div>
 
