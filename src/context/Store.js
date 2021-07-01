@@ -16,14 +16,15 @@ class Store {
             setStep: action,
             elapsedTime: observable,
             incrementElapsedTime: action,
-            zeroElapsedTime: action
+            zeroElapsedTime: action,
+            setElapsedTimeManually: action
         })
     }
 
     user = {
         uid: null,
         email: null,
-        name: null
+        name: null,
     }
 
     allWorkouts = []
@@ -31,12 +32,14 @@ class Store {
     selectedWorkout = {
         json: null,
         name: null,
-        time: null
+        time: null,
+        tid: null
     }
 
     currentStep = 0
 
     elapsedTime = 0
+
 
     zeroElapsedTime() {
         this.elapsedTime = 0
@@ -44,6 +47,10 @@ class Store {
 
     incrementElapsedTime(addition) {
         this.elapsedTime += addition;
+    }
+
+    setElapsedTimeManually(timeInSeconds) {
+        this.elapsedTime = timeInSeconds;
     }
 
     setStep(index) {
@@ -54,6 +61,9 @@ class Store {
         this.selectedWorkout.json = workout.json;
         this.selectedWorkout.name = workout.name;
         this.selectedWorkout.time = workout.time;
+        this.selectedWorkout.tid = workout.tid;
+
+        console.log(this.selectedWorkout.tid);
     }
 
     fetchWorkouts(workouts) {
@@ -62,7 +72,6 @@ class Store {
 
     setUser(newUser) {
         this.user = newUser;
-        console.log(this.user);
     }
 }
 

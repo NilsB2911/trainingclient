@@ -35,26 +35,30 @@ class Register extends Component {
                 <div id={"registerTop"}>
                     <h2 id={"registerTag"} className={"bebas"}>Register</h2>
                     <Input
+                        className={"registerField"}
                         label={"Mail"}
                         type="text"
                         value={this.state.email}
                         onChange={this.handleMail}
                     />
                     <Input
+                        className={"registerField"}
                         label={"Name"}
                         type="text"
                         value={this.state.name}
                         onChange={this.handleName}
                     />
                     <Input
+                        className={"registerField"}
                         label={"Password"}
-                        type="text"
+                        type="password"
                         value={this.state.password}
                         onChange={this.handlePw}
                     />
                     <Input
-                        label={"Confirm Password"}
-                        type="text"
+                        className={"registerField"}
+                        label={"Repeat"}
+                        type="password"
                         value={this.state.confirmPassword}
                         onChange={this.handleCpw}
                     />

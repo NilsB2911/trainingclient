@@ -33,6 +33,7 @@ function App() {
                 <Route path={"/login"} component={Login}/>
                 <Route path={"/create"} component={CreateWorkout}/>
                 <Route path={"/select"} component={SelectWorkout}/>
+                <Route path={"/edit/:tid/:update"} component={CreateWorkout}/>
             </Router>
         </div>
     );

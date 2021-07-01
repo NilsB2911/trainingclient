@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import SubmitLogin from "../components/functionComponents/submitLogin";
-import store from "../context/Store";
+import {Input} from "semantic-ui-react";
 
 class Login extends Component {
     constructor() {
@@ -23,17 +23,15 @@ class Login extends Component {
             <div id={"positionLoginMiddle"}>
                 <div id={"loginTop"}>
                     <h2 id={"registerTag"} className={"bebas"}>Login</h2>
-                    <p className={"bebas"}>Email</p>
-                    <input
-                        className={"formInput"}
+                    <Input
+                        label="E-Mail"
                         type="text"
                         value={this.state.email}
                         onChange={this.handleEmail}
                     />
-                    <p className={"bebas"}>Password</p>
-                    <input
-                        className={"formInput"}
-                        type="text"
+                    <Input
+                        label="Password"
+                        type="password"
                         value={this.state.pw}
                         onChange={this.handlePw}
                     />

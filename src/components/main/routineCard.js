@@ -9,10 +9,9 @@ class RoutineCard extends Component {
     render() {
         return (
             <div className={"routineCard headline"}
-                 style={this.props.isSame ? {backgroundColor: "#4AE4C5", color: "#0F0F0F"} : null}>
-                <p>{this.props.id}</p>
-                <p>{this.props.name}</p>
-                <p>{this.props.time}</p>
+                 style={this.props.isSame ? {backgroundColor: "#06374d", color: "#f7f7f7"} : null}>
+                <p className={"routineCardName"}>{this.props.name}</p>
+                <p className={"routineCardTime"}>{this.props.time} seconds</p>
             </div>
         );
     }

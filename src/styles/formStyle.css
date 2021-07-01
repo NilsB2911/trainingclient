@@ -29,3 +29,7 @@
 .bebas {
     font-family: 'Bebas Neue', cursive;
 }
+
+.registerField {
+    width: 100%;
+}

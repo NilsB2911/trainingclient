@@ -8,10 +8,21 @@ import store from "../context/Store";
 class MainView extends Component {
 
     componentWillUnmount() {
+        this.clearStore();
+    }
+
+    componentDidMount() {
+        window.onbeforeunload = function() {
+            this.clearStore();
+        }.bind(this);
+    }
+
+    clearStore = () => {
         store.setSelectedWorkout({
             json: null,
             name: null,
-            time: null
+            time: null,
+            tid: null
         });
 
         store.setStep(0);

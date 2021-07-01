@@ -5,7 +5,8 @@ import {observer} from "mobx-react";
 import Countdown from 'react-countdown';
 
 import store from "../../context/Store";
-import audio from "../../global/stepDone.mp3";
+import audio from "../../global/yaaah.mp3";
+import Pausebutton from "./pausebutton";
 
 @observer
 class CountdownRoutine extends Component {
@@ -13,6 +14,8 @@ class CountdownRoutine extends Component {
         super();
         this.state = {
             completed: false,
+            countdownApi: null,
+            isPaused: true
         }
     }
 
@@ -26,8 +29,8 @@ class CountdownRoutine extends Component {
         }
     }
 
-    countdownRenderer = ({ hours, minutes, seconds, completed, total }) => {
-        if (completed){
+    countdownRenderer = ({hours, minutes, seconds, completed, total}) => {
+        if (completed) {
             new Audio(audio).play();
         }
 
@@ -35,15 +38,31 @@ class CountdownRoutine extends Component {
         let minuteString = minutes < 10 ? "0" + String(minutes) : minutes;
         let secondString = seconds < 10 ? "0" + String(seconds) : seconds;
 
-        if(total !== store.selectedWorkout.json[store.currentStep].duration * 1000) {
-            store.incrementElapsedTime(1/2)
+        if (total !== store.selectedWorkout.json[store.currentStep].duration * 1000) {
+            store.incrementElapsedTime(1 / 2)
         }
 
-        return(
+        return (
             <div id={"countdownRenderer"}>
-                <h4 id={"numberCountDown"}>{hourString}:{minuteString}:{secondString}</h4>
+                <h4 id={"numberCountDown"}>{hourString !== "00" ? hourString + ":" : null}{minuteString}:{secondString}</h4>
             </div>
         )
+    }
+
+    setRef = (countdown) => {
+        if (countdown) {
+            this.setState({countdownApi: countdown.getApi()})
+        }
+    }
+
+    startTimer = () => {
+        //console.log("called from parent");
+        this.state.countdownApi && this.state.countdownApi.start();
+    }
+
+    stopTimer = () => {
+        //console.log("called from parent");
+        this.state.countdownApi && this.state.countdownApi.pause();
     }
 
     render() {
@@ -57,9 +76,17 @@ class CountdownRoutine extends Component {
                                 date={Date.now() + store.selectedWorkout.json[store.currentStep].duration * 1000}
                                 onComplete={this.incrementStore}
                                 key={store.currentStep}
+                                autoStart={store.currentStep !== 0}
+                                controlled={false}
+                                ref={this.setRef}
                                 renderer={this.countdownRenderer}/> : <p>DONE</p>}
                     </div> : <p>None selected</p>
-                }</div>
+                }
+                {store.selectedWorkout.tid ? <div id={"placeButtonId"}>
+                    <Pausebutton startTimer={this.startTimer} stopTimer={this.stopTimer}/>
+                </div> : null}
+
+            </div>
         );
     }
 }

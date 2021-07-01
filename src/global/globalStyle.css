@@ -10,10 +10,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 :root {
-    --primary-blue: #4AE4C5;
+    /*--primary-blue: #4AE4C5;
     --secondary-blue: #145f50;
     --primary-black: #393939;
-    --secondary-black: #898b8b;
+    --secondary-black: #898b8b;*/
+    --primary-blue: #06374d;
+    --secondary-blue: #6a6a6a;
+    --primary-black: #f7f7f7;
+    --secondary-black: #dedede ;
 }
 
 * {
@@ -22,7 +26,7 @@
 }
 
 body {
-    background: black;
+    background: white;
 }
 
 /* Custom Scrollbar, yeah */
@@ -33,7 +37,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: var(--secondary-black);
+    background: var(--primary-blue);
     border-radius: 5px;
     margin: 2vh 0;
 }

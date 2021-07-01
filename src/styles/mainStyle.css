@@ -12,11 +12,11 @@
     height: auto;
     border-radius: 5px;
     background-color: var(--primary-black);
+    border: var(--primary-blue) 2px solid;
 }
 
 .headline {
     font-family: 'Bebas Neue', cursive;
-    color: var(--secondary-black);
 }
 
 #content {
@@ -35,6 +35,7 @@
     border-radius: 5px;
     height: 100%;
     background-color: var(--primary-black);
+    border: var(--primary-blue) solid 2px;
 }
 
 #cardDiv {
@@ -47,6 +48,7 @@
     height: auto;
     background-color: var(--primary-black);
     overflow-y: scroll;
+    border: var(--primary-blue) 2px solid;
 }
 
 #woName {
@@ -59,7 +61,41 @@
     padding: 2vh;
     width: auto;
     background-color: var(--secondary-black);
-    color: var(--primary-black);
+    color: var(--primary-blue);
     border-radius: 5px;
 }
 
+.routineCardName {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.routineCardTime {
+    font-size: 1.5rem;
+}
+
+#cirlce {
+    display: flex;
+    height: 10vh;
+    width: 10vh;
+    background-color: var(--primary-blue);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+#startStop {
+    color: var(--primary-black);
+    font-size: 3rem;
+}
+
+#placeButtonId {
+    position: absolute;
+    margin: 3vh;
+    bottom: 6.7vh;
+    right: 0;
+}

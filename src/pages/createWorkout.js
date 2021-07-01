@@ -24,6 +24,20 @@ class CreateWorkout extends Component {
         }
     }
 
+    async componentDidMount() {
+        if (this.props.match.params.tid) {
+            let queryString = "http://localhost:3001/training/edit/" + this.props.match.params.tid + "/" + store.user.uid
+            await fetch(queryString).then(result => result.json()).then(json => {
+                this.setState({workoutName: json[0].name, overallTime: json[0].duration}, () => {
+                    let steps = JSON.parse(json[0].json);
+                    this.setState({workoutSteps: steps}, () => {
+                        this.calculateTotalTime();
+                    });
+                });
+            })
+        }
+    }
+
     render() {
         return (
             <div id={"centerCreate"}>
@@ -40,7 +54,9 @@ class CreateWorkout extends Component {
                                                 {(provided) => (
                                                     <div {...provided.draggableProps} ref={provided.innerRef}>
                                                         <div className={"draggableDiv"}>
-                                                            <p className={"bebas listSteps"}>Übung {index + 1}</p>
+                                                            <p className={"bebas listSteps"}>Step {index + 1} {index + 1 < 10 ?
+                                                                <span
+                                                                    style={{color: "transparent"}}>0</span> : null}</p>
                                                             <Input
                                                                 id={step.id + "N"}
                                                                 control={"input"}
@@ -59,9 +75,12 @@ class CreateWorkout extends Component {
                                                             />
                                                             <div id={"handles"}>
                                                                 <span className={"material-icons"}
-                                                                      onClick={(e, index) => this.deleteStep(e, index)} id={"deleteHandles"}>delete</span>
+                                                                      style={index === 0 ? {zIndex: -1} : {}}
+                                                                      onClick={e => this.deleteStep(e, index)}
+                                                                      id={"deleteHandles"}>delete</span>
                                                                 <span
-                                                                    className={"material-icons"} {...provided.dragHandleProps}>reorder</span>
+                                                                    className={"material-icons"}
+                                                                    id={"dragHandles"} {...provided.dragHandleProps}>reorder</span>
                                                             </div>
 
                                                         </div>
@@ -79,16 +98,17 @@ class CreateWorkout extends Component {
                 <Button secondary onClick={this.pushToArray}>Add Step</Button>
                 <p className={"bebas"} id={"overallTime"}>Total workout time: {this.state.overallTime}</p>
                 <SaveWorkout workoutName={this.state.workoutName} workoutSteps={this.state.workoutSteps}
-                             overallTime={this.state.overallTime} currentUser={store.user.uid}/>
+                             overallTime={this.state.overallTime} currentUser={store.user.uid} update={!!this.props.match.params.update} tid={this.props.match.params.tid}/>
             </div>
         );
     }
 
-    //TODO: fix
     deleteStep = (e, index) => {
-        let newArray = [...this.state.workoutSteps]
-        newArray.splice(index, 1);
-        this.setState({workoutSteps: newArray});
+        if (this.state.workoutSteps.length > 1) {
+            let newArray = Array.from(this.state.workoutSteps);
+            newArray.splice(index, 1);
+            this.setState({workoutSteps: newArray}, () => this.calculateTotalTime());
+        }
     }
 
     handleDragEnd = e => {

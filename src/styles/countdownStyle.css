@@ -15,7 +15,9 @@
 }
 
 #stepName {
-    font-size: 4rem;
+    font-size: 10rem;
+    margin: 0;
+    color: var(--secondary-blue);
 }
 
 #numberCountDown {
