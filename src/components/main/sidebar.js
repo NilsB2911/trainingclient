@@ -10,6 +10,7 @@ class Sidebar extends Component {
 
     setStoreStep = (stepId) => {
         store.setStep(stepId);
+        console.log(store.selectedWorkout.json[stepId].duration)
         let passedTime = 0;
 
         for (let i = 0; i < stepId; i++) {

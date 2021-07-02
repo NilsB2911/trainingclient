@@ -37,3 +37,25 @@
     color: var(--primary-blue);
     font-size: 2rem;
 }
+
+.deleteEditButtons {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 10px;
+    align-items: center;
+    place-content: flex-end;
+}
+
+.workoutCard {
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 50% 50%;
+}
+
+.workoutHeader{
+    font-size: 1.8rem;
+}
+
+.workoutInfo {
+    font-size: 1.4rem;
+}

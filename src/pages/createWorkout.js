@@ -107,6 +107,11 @@ class CreateWorkout extends Component {
         if (this.state.workoutSteps.length > 1) {
             let newArray = Array.from(this.state.workoutSteps);
             newArray.splice(index, 1);
+
+            for (let i = 0; i < newArray.length; i++) {
+                newArray[i].id = i;
+            }
+
             this.setState({workoutSteps: newArray}, () => this.calculateTotalTime());
         }
     }
@@ -118,7 +123,13 @@ class CreateWorkout extends Component {
 
         copyArray.splice(e.destination.index, 0, movedStep);
 
-        this.setState({workoutSteps: copyArray});
+        for (let i = 0; i < copyArray.length; i++) {
+            copyArray[i].id = i;
+        }
+
+        this.setState({workoutSteps: copyArray}, () => {
+            console.log(this.state.workoutSteps);
+        });
     }
 
     handleName = e => {

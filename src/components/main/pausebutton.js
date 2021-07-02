@@ -4,7 +4,8 @@ class Pausebutton extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isPlaying: false
+            isPlaying: false,
+            modalOpen: true
         }
     }
 
@@ -18,12 +19,16 @@ class Pausebutton extends Component {
         });
     }
 
+
     render() {
         return (
-            <div id={"cirlce"} onClick={this.isPlayingTriggered}>
-                <p className={"material-icons"} id={"startStop"}>{this.state.isPlaying ? "pause" : "play_arrow"}</p>
+            <div>
+                <div id={"cirlce"} onClick={this.isPlayingTriggered}>
+                    <p className={"material-icons"}
+                       id={"startStop"}>{this.state.isPlaying ? "pause" : "play_arrow"}</p>
+                </div>
             </div>
-        );
+        )
     }
 }
 

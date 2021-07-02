@@ -5,6 +5,14 @@ import {observer} from "mobx-react";
 
 @observer
 class SelectWorkout extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            isHovering: false
+        }
+    }
+
     componentDidMount() {
         this.callWorkouts()
     }
@@ -44,6 +52,42 @@ class SelectWorkout extends Component {
         })
     }
 
+    getTimeFormatted = (seconds) => {
+        let minute = parseInt(seconds / 60);
+        let second = seconds % 60;
+
+        let minuteString;
+        let secondString;
+
+        minute < 10 ? minuteString = `0${minute}` : minuteString = minute
+        second < 10 ? secondString = `0${second}` : secondString = second
+        return `${minuteString}:${secondString}`
+    }
+
+    getString = (workout) => {
+        let asJson = JSON.parse(workout);
+        let conactString = "";
+
+        for (let i = 0; i < asJson.length; i++) {
+            if (i !== asJson.length - 1) {
+                conactString += asJson[i].name + ", ";
+            } else {
+                conactString += asJson[i].name
+            }
+
+        }
+        console.log(conactString)
+        return conactString
+    }
+
+    handleMouseHover = () => {
+        this.toggleHoverState()
+    }
+
+    toggleHoverState = () => {
+        this.setState({isHovering: !this.state.isHovering})
+    }
+
     render() {
         return (
             <div id={"setPosition"}>
@@ -51,15 +95,19 @@ class SelectWorkout extends Component {
                 <div id={"centerSelectionContent"}>
                     {store.allWorkouts ? store.allWorkouts.map((wo, index) => {
                         return (
-                            <div className={"selectCard headline mouseHover"}>
-                                <div
-                                    onClick={() => this.updateSelected(wo)}
-                                    key={index}>
-                                    <p>{wo.name}</p>
-                                    <p>{wo.time}</p>
+                            <div className={"selectCard headline mouseHover workoutCard"} key={index}>
+                                <div onClick={() => this.updateSelected(wo)} onMouseEnter={this.handleMouseHover}
+                                     onMouseLeave={this.handleMouseHover}>
+                                    <p className={"workoutHeader"}>{wo.name}</p>
+                                    <p className={"workoutInfo"}>{this.getTimeFormatted(wo.time)} minutes</p>
+                                    {this.state.isHovering ? <p>{this.getString(wo.json)}</p> : null}
                                 </div>
-                                <button onClick={() => this.deleteWorkout(wo.tid)}>delete</button>
-                                <button onClick={() => this.pushToEdit(wo.tid)}>edit</button>
+                                <div className={"deleteEditButtons"}>
+                                    <span className={"material-icons"}
+                                          onClick={() => this.deleteWorkout(wo.tid)}>delete</span>
+                                    <span className={"material-icons"}
+                                          onClick={() => this.pushToEdit(wo.tid)}>edit</span>
+                                </div>
                             </div>
                         )
                     }) : <p style={{color: "white"}}>loading</p>}
