@@ -3,13 +3,16 @@ import React, {Component} from 'react';
 import store from "../context/Store";
 import {observer} from "mobx-react";
 
+import {CSSTransition} from "react-transition-group";
+
 @observer
 class SelectWorkout extends Component {
 
     constructor() {
         super();
         this.state = {
-            isHovering: false
+            isHovering: false,
+            hoverId: null
         }
     }
 
@@ -76,16 +79,15 @@ class SelectWorkout extends Component {
             }
 
         }
-        console.log(conactString)
         return conactString
     }
 
-    handleMouseHover = () => {
-        this.toggleHoverState()
+    handleMouseHover = (e, index) => {
+        this.toggleHoverState(index)
     }
 
-    toggleHoverState = () => {
-        this.setState({isHovering: !this.state.isHovering})
+    toggleHoverState = (index) => {
+        this.setState({isHovering: !this.state.isHovering, hoverId: index})
     }
 
     render() {
@@ -96,11 +98,13 @@ class SelectWorkout extends Component {
                     {store.allWorkouts ? store.allWorkouts.map((wo, index) => {
                         return (
                             <div className={"selectCard headline mouseHover workoutCard"} key={index}>
-                                <div onClick={() => this.updateSelected(wo)} onMouseEnter={this.handleMouseHover}
+                                <div onClick={() => this.updateSelected(wo)}
+                                     onMouseEnter={(e) => this.handleMouseHover(e, index)}
                                      onMouseLeave={this.handleMouseHover}>
                                     <p className={"workoutHeader"}>{wo.name}</p>
                                     <p className={"workoutInfo"}>{this.getTimeFormatted(wo.time)} minutes</p>
-                                    {this.state.isHovering ? <p>{this.getString(wo.json)}</p> : null}
+                                    {this.state.isHovering && this.state.hoverId === index ?
+                                        <p>{this.getString(wo.json)}</p> : null}
                                 </div>
                                 <div className={"deleteEditButtons"}>
                                     <span className={"material-icons"}
