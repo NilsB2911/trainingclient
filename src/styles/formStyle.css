@@ -1,7 +1,7 @@
 #registerTop, #loginTop{
     display: flex;
     flex-direction: column;
-    width: 20vw;
+    width: auto;
     padding: 5vh;
     background-color: var(--primary-blue);
     border-radius: 20px;
@@ -24,6 +24,13 @@
 
 #registerTag {
     margin-bottom: 7vh;
+}
+
+.spaceBetweenFields {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
+    padding-bottom: 10px;
 }
 
 .bebas {

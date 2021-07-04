@@ -3,8 +3,6 @@ import React, {Component} from 'react';
 import store from "../context/Store";
 import {observer} from "mobx-react";
 
-import {CSSTransition} from "react-transition-group";
-
 @observer
 class SelectWorkout extends Component {
 
