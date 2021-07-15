@@ -8,8 +8,16 @@ import store from "../../context/Store";
 @observer
 class Sidebar extends Component {
 
+    componentDidMount() {
+        store.socket.on("newCurrentStep", (step) => {
+            console.log("helllllllllo " + step)
+            this.setStoreStep(step);
+        })
+    }
+
     setStoreStep = (stepId) => {
         store.setStep(stepId);
+        store.socket.emit("currentStepChanged", stepId);
         console.log(store.selectedWorkout.json[stepId].duration)
         let passedTime = 0;
 

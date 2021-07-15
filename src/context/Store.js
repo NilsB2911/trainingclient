@@ -14,6 +14,7 @@ class Store {
             allWorkouts: observable,
             selectedWorkout: observable,
             currentStep: observable,
+            roomId: observable,
             socket: observable,
             setUser: action,
             setStep: action,
@@ -21,7 +22,8 @@ class Store {
             incrementElapsedTime: action,
             zeroElapsedTime: action,
             setElapsedTimeManually: action,
-            fetchUser: action
+            fetchUser: action,
+            setRoomId: action
         })
     }
 
@@ -44,7 +46,25 @@ class Store {
 
     elapsedTime = 0
 
-    socket = io("http://localhost:3002")
+    socket = null
+
+    roomId = this.socket = io("http://localhost:3002", {
+        query: {
+            roomId: "lol"
+        }
+    })
+
+    setSocket(roomId) {
+        this.socket = io("http://localhost:3002", {
+            query: {
+                roomId: roomId
+            }
+        })
+    }
+
+    setRoomId(roomId) {
+        this.roomId = roomId
+    }
 
     zeroElapsedTime() {
         this.elapsedTime = 0

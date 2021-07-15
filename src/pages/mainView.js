@@ -13,27 +13,17 @@ class MainView extends Component {
         this.clearStore();
     }
 
-    async componentDidMount() {
-        let paramQuery = this.props.location.search.substring(1);
-
-        if (paramQuery) {
-            console.log(paramQuery);
-            await fetch(`http://localhost:3001/rooms/getCommonWorkout/${paramQuery}`, {
-                method: 'get',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                credentials: "include",
-            }).then(result => result.json()).then(wo => {
+    componentDidMount() {
+        if (this.props.location.search) {
+            store.socket.on("newWorkoutSelected", function (wo) {
                 store.setSelectedWorkout({
                     json: JSON.parse(wo.json),
                     name: wo.name,
                     time: wo.time,
                     tid: wo.tid
                 })
+                console.log(wo)
             })
-        } else {
-            console.log("not yet in room");
         }
     }
 

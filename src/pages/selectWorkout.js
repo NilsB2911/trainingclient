@@ -30,19 +30,32 @@ class SelectWorkout extends Component {
             tid: wo.tid
         })
 
+        this.props.history.push({
+            pathname: "/",
+            //search: json
+        })
+    }
+
+    createRoom = async (wo) => {
+        store.setSelectedWorkout({
+            json: JSON.parse(wo.json),
+            name: wo.name,
+            time: wo.time,
+            tid: wo.tid
+        })
+
         await fetch("http://localhost:3001/rooms/createRoom", {
-            method: 'post',
+            method: "post",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             },
             credentials: "include",
-            body: JSON.stringify({
-                trainingId: wo.tid
-            })
-        }).then(query => query.json()).then(json => {
+        }).then(result => result.json()).then(roomId => {
+            store.setRoomId(roomId);
+            store.socket.emit("workoutSelected", wo)
             this.props.history.push({
                 pathname: "/",
-                search: json
+                search: roomId
             })
         })
     }
@@ -123,6 +136,8 @@ class SelectWorkout extends Component {
                                         <p>{this.getString(wo.json)}</p> : null}
                                 </div>
                                 <div className={"deleteEditButtons"}>
+                                    <span className={"material-icons"}
+                                          onClick={() => this.createRoom(wo)}>supervisor_account</span>
                                     <span className={"material-icons"}
                                           onClick={() => this.deleteWorkout(wo.tid)}>delete</span>
                                     <span className={"material-icons"}
