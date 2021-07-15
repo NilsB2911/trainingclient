@@ -14,7 +14,10 @@ class SelectWorkout extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        if (store.user.uid === null) {
+            await store.fetchUser();
+        }
         this.callWorkouts()
     }
 

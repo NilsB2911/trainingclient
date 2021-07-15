@@ -12,18 +12,7 @@ import {useEffect} from "react";
 
 function App() {
     useEffect(() => {
-        async function fetchData() {
-            await fetch("http://localhost:3001/user/tokenLogin", {
-                method: 'post',
-                credentials: 'include',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            }).then(response => response.json()).then(json => store.setUser(json)).then(() => {
-
-            })
-        }
-       fetchData()
+        store.fetchUser();
     }, [])
     return (
         <div className="App">

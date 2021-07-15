@@ -17,7 +17,8 @@ class Store {
             elapsedTime: observable,
             incrementElapsedTime: action,
             zeroElapsedTime: action,
-            setElapsedTimeManually: action
+            setElapsedTimeManually: action,
+            fetchUser: action
         })
     }
 
@@ -72,6 +73,16 @@ class Store {
 
     setUser(newUser) {
         this.user = newUser;
+    }
+
+    async fetchUser() {
+        await fetch("http://localhost:3001/user/tokenLogin", {
+            method: 'post',
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json"
+            },
+        }).then(response => response.json()).then(json => this.setUser(json))
     }
 }
 
