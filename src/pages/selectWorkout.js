@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 
 import store from "../context/Store";
 import {observer} from "mobx-react";
@@ -19,14 +19,29 @@ class SelectWorkout extends Component {
     }
 
     /* eslint-enable */
-    updateSelected = (wo) => {
+    updateSelected = async (wo) => {
         store.setSelectedWorkout({
             json: JSON.parse(wo.json),
             name: wo.name,
             time: wo.time,
             tid: wo.tid
         })
-        this.props.history.push("/");
+
+        await fetch("http://localhost:3001/rooms/createRoom", {
+            method: 'post',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify({
+                trainingId: wo.tid
+            })
+        }).then(query => query.json()).then(json => {
+            this.props.history.push({
+                pathname: "/",
+                search: json
+            })
+        })
     }
 
     callWorkouts = async () => {
