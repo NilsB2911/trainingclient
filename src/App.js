@@ -19,7 +19,9 @@ function App() {
                 headers: {
                     "Content-Type": "application/json"
                 },
-            }).then(response => response.json()).then(json => store.setUser(json))
+            }).then(response => response.json()).then(json => store.setUser(json)).then(() => {
+
+            })
         }
        fetchData()
     }, [])

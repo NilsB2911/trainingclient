@@ -4,17 +4,38 @@ import Sidebar from "../components/main/sidebar";
 import CountdownRoutine from "../components/main/countdownRoutine";
 import ProgessBar from "../components/main/progessBar";
 import store from "../context/Store";
+import {observer} from "mobx-react";
+import {toJS} from "mobx";
 
+@observer
 class MainView extends Component {
 
-    componentWillUnmount() {
+    async componentWillUnmount() {
         this.clearStore();
     }
 
-    componentDidMount() {
-        window.onbeforeunload = function() {
-            this.clearStore();
-        }.bind(this);
+    async componentDidMount() {
+        let paramQuery = this.props.location.search.substring(1);
+
+        if (paramQuery) {
+            console.log(paramQuery);
+            await fetch(`http://localhost:3001/rooms/getCommonWorkout/${paramQuery}`, {
+                method: 'get',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+            }).then(result => result.json()).then(wo => {
+                store.setSelectedWorkout({
+                    json: JSON.parse(wo.json),
+                    name: wo.name,
+                    time: wo.time,
+                    tid: wo.tid
+                })
+            })
+        } else {
+            console.log("not yet in room");
+        }
     }
 
     clearStore = () => {
