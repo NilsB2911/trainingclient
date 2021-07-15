@@ -5,7 +5,6 @@ import CountdownRoutine from "../components/main/countdownRoutine";
 import ProgessBar from "../components/main/progessBar";
 import store from "../context/Store";
 import {observer} from "mobx-react";
-import {toJS} from "mobx";
 
 @observer
 class MainView extends Component {

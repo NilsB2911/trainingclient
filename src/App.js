@@ -10,10 +10,12 @@ import SelectWorkout from "./pages/selectWorkout";
 import store from "./context/Store";
 import {useEffect} from "react";
 
+
 function App() {
-    useEffect(() => {
-        store.fetchUser();
+    useEffect(async () => {
+        await store.fetchUser();
     }, [])
+
     return (
         <div className="App">
             {/* eslint-disable-next-line react/jsx-pascal-case */}

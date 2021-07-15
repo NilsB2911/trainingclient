@@ -4,6 +4,8 @@ import {
     action
 } from "mobx";
 
+import io from "socket.io-client"
+
 class Store {
     constructor() {
         makeObservable(this, {
@@ -12,6 +14,7 @@ class Store {
             allWorkouts: observable,
             selectedWorkout: observable,
             currentStep: observable,
+            socket: observable,
             setUser: action,
             setStep: action,
             elapsedTime: observable,
@@ -41,6 +44,7 @@ class Store {
 
     elapsedTime = 0
 
+    socket = io("http://localhost:3002")
 
     zeroElapsedTime() {
         this.elapsedTime = 0

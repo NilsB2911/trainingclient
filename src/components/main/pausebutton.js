@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import store from "../../context/Store";
 
 class Pausebutton extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -9,12 +11,26 @@ class Pausebutton extends Component {
         }
     }
 
+    componentDidMount() {
+        store.socket.on("newPlaying", (data) => {
+            this.setState({isPlaying: data}, () => {
+                if (data === true) {
+                    this.props.startTimer();
+                } else if (data === false) {
+                    this.props.stopTimer();
+                }
+            })
+        })
+    }
+
     isPlayingTriggered = () => {
         this.setState({isPlaying: !this.state.isPlaying}, () => {
             if (this.state.isPlaying === true) {
                 this.props.startTimer();
+                store.socket.emit("playing", true)
             } else if (this.state.isPlaying === false) {
                 this.props.stopTimer()
+                store.socket.emit("playing", false)
             }
         });
     }
