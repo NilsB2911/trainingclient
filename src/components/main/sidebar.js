@@ -10,15 +10,18 @@ class Sidebar extends Component {
 
     componentDidMount() {
         store.socket.on("newCurrentStep", (step) => {
-            console.log("helllllllllo " + step)
             this.setStoreStep(step);
         })
     }
 
+    emittingNewStep = (stepId) => {
+        store.socket.emit("currentStepChanged", stepId);
+        this.setStoreStep(stepId)
+    }
+
     setStoreStep = (stepId) => {
         store.setStep(stepId);
-        store.socket.emit("currentStepChanged", stepId);
-        console.log(store.selectedWorkout.json[stepId].duration)
+        store.setPlayingFromSocket(true)
         let passedTime = 0;
 
         for (let i = 0; i < stepId; i++) {
@@ -33,7 +36,7 @@ class Sidebar extends Component {
                 <p id={"woName"} className={"bebas"}>{store.selectedWorkout.name}</p>
                 {store.selectedWorkout.json ? store.selectedWorkout.json.map((v, index) => {
                     return (
-                        <div onClick={() => this.setStoreStep(index)}>
+                        <div onClick={() => this.emittingNewStep(index)}>
                             <RoutineCard key={index} id={v.id} name={v.name} time={v.duration}
                                          isSame={index === store.currentStep}/>
                         </div>

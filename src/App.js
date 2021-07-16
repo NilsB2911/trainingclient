@@ -13,7 +13,7 @@ import {useEffect} from "react";
 
 function App() {
     useEffect(async () => {
-        await store.fetchUser();
+        await store.fetchUser()
     }, [])
 
     return (

@@ -16,6 +16,7 @@ class Store {
             currentStep: observable,
             roomId: observable,
             socket: observable,
+            isPlaying: observable,
             setUser: action,
             setStep: action,
             elapsedTime: observable,
@@ -53,6 +54,16 @@ class Store {
             roomId: "lol"
         }
     })
+
+    isPlaying = false
+
+    setPlaying() {
+        this.isPlaying = !this.isPlaying
+    }
+
+    setPlayingFromSocket(data) {
+        this.isPlaying = data
+    }
 
     setSocket(roomId) {
         this.socket = io("http://localhost:3002", {

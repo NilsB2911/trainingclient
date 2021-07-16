@@ -14,8 +14,7 @@ class CountdownRoutine extends Component {
         super();
         this.state = {
             completed: false,
-            countdownApi: null,
-            isPaused: true
+            countdownApi: null
         }
     }
 
