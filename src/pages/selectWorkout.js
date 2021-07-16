@@ -49,10 +49,12 @@ class SelectWorkout extends Component {
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify({
+                trainingId: wo.tid
+            }),
             credentials: "include",
         }).then(result => result.json()).then(roomId => {
             store.setRoomId(roomId);
-            store.socket.emit("workoutSelected", wo)
             this.props.history.push({
                 pathname: "/",
                 search: roomId
