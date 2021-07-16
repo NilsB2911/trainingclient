@@ -58,10 +58,12 @@ class Store {
     isPlaying = false
 
     setPlaying() {
+        console.log("setPlaying")
         this.isPlaying = !this.isPlaying
     }
 
     setPlayingFromSocket(data) {
+        console.log("setPlayingFromSocket")
         this.isPlaying = data
     }
 

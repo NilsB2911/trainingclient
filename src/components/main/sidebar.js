@@ -21,7 +21,11 @@ class Sidebar extends Component {
 
     setStoreStep = (stepId) => {
         store.setStep(stepId);
-        store.setPlayingFromSocket(true)
+
+        if(store.currentStep !== 0) {
+            store.setPlayingFromSocket(true)
+        }
+
         let passedTime = 0;
 
         for (let i = 0; i < stepId; i++) {

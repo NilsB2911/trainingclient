@@ -21,7 +21,6 @@ class Pausebutton extends Component {
             } else if (data === false) {
                 this.props.stopTimer();
             }
-
         })
     }
 

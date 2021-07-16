@@ -15,7 +15,6 @@ class MainView extends Component {
 
     componentDidMount() {
         if (this.props.location.search) {
-            store.socket.emit("joinRoom", this.props.location.search.substring(1))
             store.socket.on("newWorkoutSelected", function (wo) {
                 store.setSelectedWorkout({
                     json: JSON.parse(wo.json),
@@ -24,6 +23,7 @@ class MainView extends Component {
                     tid: wo.tid
                 })
             })
+            store.socket.emit("joinRoom", this.props.location.search.substring(1))
         }
     }
 
