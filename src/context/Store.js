@@ -105,7 +105,13 @@ class Store {
             headers: {
                 "Content-Type": "application/json"
             },
-        }).then(response => response.json()).then(json => this.setUser(json))
+        }).then(response => {
+            if(response.status === 200) {
+                response.json().then(json => this.setUser(json))
+            } else if(response.status === 403) {
+                console.log("error with jwt cookie");
+            }
+        })
     }
 }
 

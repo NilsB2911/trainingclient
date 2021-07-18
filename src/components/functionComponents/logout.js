@@ -11,7 +11,14 @@ export default function Logout(props) {
         await fetch("http://localhost:3001/user/logout", {
             method: 'post',
             credentials: 'include'
-        }).then(res => res.json()).then(() => store.setUser({uid: null, name: null, email: null})).then(() => history.push("/"));
+        }).then(res => {
+            if(res.status === 200) {
+                res.json().then(() => store.setUser({uid: null, name: null, email: null})).then(() => history.push("/"));
+            } else {
+                store.setUser({uid: null, name: null, email: null})
+                history.push("/")
+            }
+        })
         store.currentStep = 0;
     }
 

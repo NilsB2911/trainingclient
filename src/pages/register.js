@@ -12,8 +12,13 @@ class Register extends Component {
             email: "",
             password: "",
             confirmPassword: "",
-            name: ""
+            name: "",
+            errorOnCreate: false
         }
+    }
+
+    receivedErrorOnCreate = () => {
+        this.setState({errorOnCreate: true})
     }
 
     handleMail = (e) => {
@@ -34,6 +39,7 @@ class Register extends Component {
             <div id={"positionRegisterMiddle"}>
                 <div id={"registerTop"}>
                     <h2 id={"registerTag"} className={"bebas"}>Register</h2>
+                    {this.state.errorOnCreate ? <p>Something went wrong here. Please try again later</p> : null}
                     <div className={"spaceBetweenFields"}>
                         <Input
                             className={"registerField"}
@@ -65,7 +71,7 @@ class Register extends Component {
                         />
                     </div>
                     <SubmitRegister email={this.state.email} password={this.state.password}
-                                    confirmPassword={this.state.confirmPassword} name={this.state.name}/>
+                                    confirmPassword={this.state.confirmPassword} name={this.state.name} onError={this.receivedErrorOnCreate}/>
                 </div>
             </div>
 

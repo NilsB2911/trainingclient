@@ -20,9 +20,11 @@ export default function SaveWorkout(props) {
                         userId: props.currentUser,
                         tid: props.tid
                     })
-                }).then(res => res.json()).then(resString => {
-                    if (resString === true) {
+                }).then(res => {
+                    if(res.status === 204) {
                         history.push("/select");
+                    } else if(res.status === 404) {
+                        console.log("that didnt work");
                     }
                 })
             } else {
@@ -38,9 +40,11 @@ export default function SaveWorkout(props) {
                         duration: props.overallTime,
                         userId: props.currentUser
                     })
-                }).then(res => res.json()).then(resString => {
-                    if (resString === true) {
+                }).then(res => {
+                    if (res.status === 201) {
                         history.push("/select");
+                    } else if(res.status === 500) {
+                        console.log("that didnt work")
                     }
                 })
             }

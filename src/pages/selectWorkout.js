@@ -57,18 +57,35 @@ class SelectWorkout extends Component {
                 trainingId: wo.tid
             }),
             credentials: "include",
-        }).then(result => result.json()).then(roomId => {
-            store.setRoomId(roomId);
-            this.props.history.push({
-                pathname: "/",
-                search: roomId
-            })
+        }).then(result => {
+            if (result.status === 201) {
+                result.json().then(roomId => {
+                    store.setRoomId(roomId);
+                    this.props.history.push({
+                        pathname: "/",
+                        search: roomId
+                    })
+                })
+            } else if (result.status === 500) {
+                console.log("couldnt create room")
+                this.props.history.push({
+                    pathname: "/"
+                })
+            }
         })
     }
 
     callWorkouts = async () => {
         let queryString = "http://localhost:3001/training/get/" + store.user.uid;
-        await fetch(queryString).then(response => response.json()).then(json => store.fetchWorkouts(json));
+        await fetch(queryString, {
+            method: "get",
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(json => store.fetchWorkouts(json))
+            } else if(response.status === 404) {
+                this.props.history.push("/login");
+            }
+        })
     }
 
     deleteWorkout = async (tid) => {
@@ -81,7 +98,13 @@ class SelectWorkout extends Component {
                 tid: tid,
                 uid: store.user.uid
             })
-        }).then(response => response.json()).then(json => store.fetchWorkouts(json));
+        }).then(response => {
+            if (response.status === 204) {
+                response.json().then(json => store.fetchWorkouts(json));
+            } else if(response.status === 409) {
+                console.log("couldnt delete")
+            }
+        })
     }
 
     pushToEdit = (tid) => {

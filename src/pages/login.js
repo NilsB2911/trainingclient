@@ -7,8 +7,13 @@ class Login extends Component {
         super();
         this.state = {
             email: "",
-            pw: ""
+            pw: "",
+            errorOnLogin: false
         }
+    }
+
+    receivedErrorOnLogin = () => {
+        this.setState({errorOnLogin: true})
     }
 
     handleEmail = (e) => {
@@ -23,6 +28,7 @@ class Login extends Component {
             <div id={"positionLoginMiddle"}>
                 <div id={"loginTop"}>
                     <h2 id={"registerTag"} className={"bebas"}>Login</h2>
+                    {this.state.errorOnLogin ? <p>Username or password incorrect. Try again</p> : null}
                     <div className={"spaceBetweenFields"}>
                     <Input
                             label="E-Mail"
@@ -45,7 +51,7 @@ class Login extends Component {
                             />
                         </Form.Input>
                     </div>
-                    <SubmitLogin email={this.state.email} password={this.state.pw}/>
+                    <SubmitLogin email={this.state.email} password={this.state.pw} onError={this.receivedErrorOnLogin}/>
                 </div>
             </div>
 

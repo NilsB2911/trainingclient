@@ -24,6 +24,9 @@ class MainView extends Component {
                 })
             })
             store.socket.emit("joinRoom", this.props.location.search.substring(1))
+            setTimeout(() => {
+                store.socket.emit("joinWithName", store.user.name)
+            }, 500)
             store.setRoomId(this.props.location.search.substring(1));
         }
     }

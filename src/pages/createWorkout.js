@@ -24,16 +24,27 @@ class CreateWorkout extends Component {
         }
     }
 
+    /*
+        populates edit page with selected workout
+     */
     async componentDidMount() {
         if (this.props.match.params.tid) {
-            let queryString = "http://localhost:3001/training/edit/" + this.props.match.params.tid + "/" + store.user.uid
-            await fetch(queryString).then(result => result.json()).then(json => {
-                this.setState({workoutName: json[0].name, overallTime: json[0].duration}, () => {
-                    let steps = JSON.parse(json[0].json);
-                    this.setState({workoutSteps: steps}, () => {
-                        this.calculateTotalTime();
-                    });
-                });
+            let queryString = `http://localhost:3001/training/edit/${this.props.match.params.tid}/${store.user.uid}`
+            await fetch(queryString, {
+                method: "get"
+            }).then(result => {
+                if(result.status === 200) {
+                    result.json().then(json => {
+                        this.setState({workoutName: json[0].name, overallTime: json[0].duration}, () => {
+                            let steps = JSON.parse(json[0].json);
+                            this.setState({workoutSteps: steps}, () => {
+                                this.calculateTotalTime();
+                            });
+                        });
+                    })
+                } else if(result.status === 404) {
+                    this.props.history.push("/")
+                }
             })
         }
     }

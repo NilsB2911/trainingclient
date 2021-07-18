@@ -18,7 +18,13 @@ export default function SubmitRegister(props) {
                 pw: props.password,
                 name: props.name
             })
-        }).then(response => response.json()).then(json => store.setUser(json)).then(() => history.push("/"))
+        }).then(response => {
+            if(response.status === 200) {
+                response.json().then(json => store.setUser(json)).then(() => history.push("/"))
+            } else if(response.status === 401) {
+                props.onError();
+            }
+        }).catch(error => console.log(error))
     }
 
     return (

@@ -20,7 +20,13 @@ export default function SubmitLogin(props) {
                 email: props.email,
                 pw: props.password,
             })
-        }).then(response => response.json()).then(json => store.setUser(json)).then(() => history.push("/"))
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(json => store.setUser(json)).then(() => history.push("/"))
+            } else if (response.status === 401) {
+                props.onError();
+            }
+        })
     }
 
     return (
