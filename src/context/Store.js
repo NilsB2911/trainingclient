@@ -47,13 +47,9 @@ class Store {
 
     elapsedTime = 0
 
-    socket = null
+    socket = io("http://localhost:3002")
 
-    roomId = this.socket = io("http://localhost:3002", {
-        query: {
-            roomId: "lol"
-        }
-    })
+    roomId = null
 
     isPlaying = false
 
@@ -65,14 +61,6 @@ class Store {
     setPlayingFromSocket(data) {
         console.log("setPlayingFromSocket")
         this.isPlaying = data
-    }
-
-    setSocket(roomId) {
-        this.socket = io("http://localhost:3002", {
-            query: {
-                roomId: roomId
-            }
-        })
     }
 
     setRoomId(roomId) {
@@ -100,8 +88,6 @@ class Store {
         this.selectedWorkout.name = workout.name;
         this.selectedWorkout.time = workout.time;
         this.selectedWorkout.tid = workout.tid;
-
-        console.log(this.selectedWorkout.tid);
     }
 
     fetchWorkouts(workouts) {

@@ -5,14 +5,44 @@
     grid-gap: 20px;
 }
 
-#cameraBar {
-    margin: 2vh;
-    padding: 1vh;
-    width: 20vw;
+#heightDef {
     height: auto;
+    margin: 2vh;
+    width: 20vw;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(10, auto);
+    grid-gap: 20px;
+}
+
+#cameraBarWith {
+    grid-row: 1 /span 9;
     border-radius: 5px;
     background-color: var(--primary-black);
     border: var(--primary-blue) 2px solid;
+}
+
+#cameraBarWithout {
+    grid-row: 1 /span 10;
+    border-radius: 5px;
+    background-color: var(--primary-black);
+    border: var(--primary-blue) 2px solid;
+}
+
+#leaveButton {
+    grid-row: 10;
+    height: 100%;
+}
+
+#actualLeaveButton {
+    height: 100%;
+    border-radius: 5px;
+    background-color: var(--primary-black);
+    border: var(--primary-blue) 2px solid;
+}
+
+#noLeaveButton {
+    display: none;
 }
 
 .headline {

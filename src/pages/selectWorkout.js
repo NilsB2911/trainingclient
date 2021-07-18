@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react';
+import React, {Component} from 'react';
 
 import store from "../context/Store";
 import {observer} from "mobx-react";

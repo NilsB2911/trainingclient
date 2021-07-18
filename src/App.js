@@ -12,8 +12,11 @@ import {useEffect} from "react";
 
 
 function App() {
-    useEffect(async () => {
-        await store.fetchUser()
+    useEffect(() => {
+        async function fetchUsers() {
+            await store.fetchUser()
+        }
+        fetchUsers()
     }, [])
 
     return (

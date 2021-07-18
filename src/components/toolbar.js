@@ -25,7 +25,7 @@ class Toolbar extends Component {
                     }
                     {store.user.uid ?
                         <div id={"alignLogoutRight"}>
-                            <p>Hi {store.user.name}</p>
+                            <div id={"usernameCircle"}></div>
                             <Logout id={"loginButtonPosition"}/>
                         </div> :
                         null}
