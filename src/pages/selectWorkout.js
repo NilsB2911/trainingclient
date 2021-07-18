@@ -44,6 +44,10 @@ class SelectWorkout extends Component {
             tid: wo.tid
         })
 
+        if(store.socket.connected === false) {
+            store.socket.connect()
+        }
+
         await fetch("http://localhost:3001/rooms/createRoom", {
             method: "post",
             headers: {

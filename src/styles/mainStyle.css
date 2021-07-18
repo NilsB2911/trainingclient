@@ -30,15 +30,20 @@
 }
 
 #leaveButton {
+    cursor: pointer;
     grid-row: 10;
     height: 100%;
+    background-color: var(--primary-blue);
+    border-radius: 5px;
+    border: var(--primary-blue) 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #actualLeaveButton {
-    height: 100%;
-    border-radius: 5px;
-    background-color: var(--primary-black);
-    border: var(--primary-blue) 2px solid;
+    color: var(--secondary-black);
+    height: auto;
 }
 
 #noLeaveButton {
