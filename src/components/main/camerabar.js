@@ -1,5 +1,6 @@
 import React, {Component, createRef} from 'react';
 import {observer} from "mobx-react";
+import CameraView from "./cameraView";
 
 //Keine Ahnung, warum das hier notwendig war
 import {withRouter} from 'react-router-dom';
@@ -24,7 +25,6 @@ class Camerabar extends Component {
     }
 
     leaveRoom = () => {
-        store.socket.disconnect("user exit")
         store.setRoomId(null)
         this.props.history.push("/");
     }
@@ -32,16 +32,14 @@ class Camerabar extends Component {
     render() {
         return (
             <div id={"heightDef"}>
-                {/*this.state.streams.map((stream, index) => {
-                    return (
-                        <video src={stream} key={index}/>
-                    )
-                })*/}
                 <div id={store.roomId ? "cameraBarWith" : "cameraBarWithout"}>
                     {this.state.allUserInRoom.length > 0 ? <div>
-                        {this.state.allUserInRoom.map((name, index) => {
+                        {this.state.allUserInRoom.map((userObj, index) => {
                             return (
-                                <p key={index}>{name}</p>
+                                <div className={"videoNameWrapper"} key={index}>
+                                    <CameraView/>
+                                    <p>{userObj.nickname}</p>
+                                </div>
                             )
                         })}
                     </div> : <p>No mate in room yet</p>}
