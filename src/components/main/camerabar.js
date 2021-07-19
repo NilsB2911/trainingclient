@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, createRef} from 'react';
 import {observer} from "mobx-react";
 
 //Keine Ahnung, warum das hier notwendig war
@@ -12,7 +12,8 @@ class Camerabar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            allUserInRoom: []
+            allUserInRoom: [],
+            streams: createRef([])
         }
     }
 
@@ -31,11 +32,16 @@ class Camerabar extends Component {
     render() {
         return (
             <div id={"heightDef"}>
+                {/*this.state.streams.map((stream, index) => {
+                    return (
+                        <video src={stream} key={index}/>
+                    )
+                })*/}
                 <div id={store.roomId ? "cameraBarWith" : "cameraBarWithout"}>
                     {this.state.allUserInRoom.length > 0 ? <div>
-                        {this.state.allUserInRoom.map((name) => {
+                        {this.state.allUserInRoom.map((name, index) => {
                             return (
-                                <p>{name}</p>
+                                <p key={index}>{name}</p>
                             )
                         })}
                     </div> : <p>No mate in room yet</p>}
