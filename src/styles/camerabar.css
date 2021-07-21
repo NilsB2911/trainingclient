@@ -1,0 +1,100 @@
+#heightDef {
+    height: auto;
+    margin: 2vh;
+    width: 20vw;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(10, auto);
+    grid-gap: 2vh;
+}
+
+#cameraBarWith {
+    height: 100%;
+    grid-row: 1 /span 9;
+    border-radius: 5px;
+    background-color: var(--primary-black);
+    border: var(--primary-blue) 2px solid;
+}
+
+#cameraBarWithout {
+    height: 100%;
+    grid-row: 1 /span 10;
+    border-radius: 5px;
+    background-color: var(--primary-black);
+    border: var(--primary-blue) 2px solid;
+}
+
+.usernameWrapper {
+    padding: 2vh 0;
+    border-bottom: var(--primary-blue) solid 2px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#listedUsers {
+    overflow-y: scroll;
+    height: 20%;
+}
+
+#leaveButton {
+    cursor: pointer;
+    grid-row: 10;
+    height: 100%;
+    background-color: var(--primary-blue);
+    border-radius: 5px;
+    border: var(--primary-blue) 2px solid;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#actualLeaveButton {
+    color: var(--secondary-black);
+}
+
+#noLeaveButton {
+    display: none;
+}
+
+#messageSection {
+    border-bottom: 2px solid var(--primary-blue);
+    height: 90%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1vh;
+}
+
+#chatInput {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 10%;
+}
+
+.messageBlock {
+    margin: 1vh;
+    width: 80%;
+    padding: 1vh;
+    background-color: var(--primary-blue);
+    border-radius: 5px;
+    color: var(--primary-black);
+}
+
+.username {
+    font-size: 1rem;
+}
+
+.spacer {
+    width: 90%;
+    height: 1px;
+    background-color: var(--primary-blue);
+}
+
+.message {
+    font-size: 1.5rem;
+}

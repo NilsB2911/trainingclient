@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {observer} from "mobx-react";
-import {Input, Button} from "semantic-ui-react";
 //import CameraView from "./cameraView";
 
 //Keine Ahnung, warum das hier notwendig war
 import {withRouter} from 'react-router-dom';
 
 import store from "../../context/Store";
+import UserCards from "./userCards";
+import ChatBar from "./chatBar";
 
 @observer
 class Camerabar extends Component {
@@ -39,46 +40,27 @@ class Camerabar extends Component {
     }
 
     leaveRoom = () => {
+        store.socket.emit("disconnect")
         store.setRoomId(null)
         this.props.history.push("/");
     }
 
-    handleMsg = (e) => {
-        this.setState({msg: e.target.value});
-    }
-
-    submitToSockets = () => {
-        console.log(this.state.msg);
-        this.setState({msg: null})
-    }
 
     render() {
         return (
             <div id={"heightDef"}>
+
+                {/*If roomid => user is in session*/}
+
                 <div id={store.roomId ? "cameraBarWith" : "cameraBarWithout"}>
-                    {this.state.allUserInRoom.length > 0 ? <div>
-                        {this.state.allUserInRoom.map((userObj, index) => {
-                            return (
-                                <div className={"videoNameWrapper"} key={index}>
-                                    {/*<CameraView stream={this.state.myWeb}/>*/}
-                                    <p>{userObj.userId}</p>
-                                    <p>{userObj.nickname}</p>
-                                </div>
-                            )
-                        })}
-                    </div> : <p>No mate in room yet</p>}
-                    {store.roomId ?
-                        <div id={"chatInput"}>
-                            <Input
-                                control={"input"}
-                                type={"text"}
-                                label={"Chat"}
-                                onChange={(e) => this.handleMsg(e)}
-                                value={this.state.msg}
-                            />
-                            <Button onClick={this.submitToSockets}>Send</Button>
-                        </div> : null}
+
+                    {/*if allUserInRoom not empty, map all users to card*/}
+
+                    <UserCards allUserInRoom={this.state.allUserInRoom}/>
+                    <ChatBar/>
+
                 </div>
+
                 <div id={store.roomId ? "leaveButton" : "noLeaveButton"}>
                     <div onClick={() => this.leaveRoom()} id={"actualLeaveButton"} className={"bebas"}>Leave room</div>
                 </div>
