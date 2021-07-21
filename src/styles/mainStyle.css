@@ -16,6 +16,7 @@
 }
 
 #cameraBarWith {
+    overflow-y: scroll;
     grid-row: 1 /span 9;
     border-radius: 5px;
     background-color: var(--primary-black);
@@ -146,4 +147,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#chatInput {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
