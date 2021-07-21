@@ -7,7 +7,8 @@ import {withRouter} from 'react-router-dom';
 
 import store from "../../context/Store";
 import UserCards from "./userCards";
-import ChatBar from "./chatBar";
+import ChatBarMessages from "./chatBarMessages";
+import ChatBarInput from "./chatBarInput";
 
 @observer
 class Camerabar extends Component {
@@ -16,9 +17,7 @@ class Camerabar extends Component {
         super(props);
         this.state = {
             myWeb: null,
-            allUserInRoom: [],
-            msg: null,
-            allMsgs: []
+            allUserInRoom: []
         }
 
     }
@@ -49,11 +48,16 @@ class Camerabar extends Component {
     render() {
         return (
             <div id={"heightDef"}>
-
                 <div id={"frame"}>
-                    <div id={"names"}></div>
-                    <div id={"comments"}></div>
-                    <div id={"input"}></div>
+                    <div id={"names"}>
+                        <UserCards allUsers={this.state.allUserInRoom}/>
+                    </div>
+                    <div id={"comments"}>
+                        <ChatBarMessages/>
+                    </div>
+                    <div id={"input"}>
+                        <ChatBarInput/>
+                    </div>
                 </div>
 
                 <div id={store.roomId ? "leaveButton" : "noLeaveButton"}>

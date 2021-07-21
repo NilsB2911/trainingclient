@@ -9,23 +9,91 @@
 
 #names {
     height: 20%;
-    background-color: red;
+    border-bottom: 2px solid var(--primary-blue)
 }
 
 #comments {
     height: 70%;
-    background-color: yellow;
-    overflow-y: scroll;
+    border-bottom: 2px solid var(--primary-blue);
+}
+
+.bubbles {
+    border: 2px solid var(--primary-blue);
+    border-radius: 5px;
+    padding: 0.5vh;
+    width: 80%;
+    margin: 0 1vh;
+}
+
+.right {
+    background-color: var(--primary-blue);
+    color: var(--primary-black);
+    margin-left: 5.5vh;
+    text-align: right;
+}
+
+.left {
+    color: var(--primary-blue);
+    margin-right: 5.5vh;
+}
+
+.bubbleName {
+    font-size: 1.2rem;
+}
+
+.bubbleMsg {
+    font-size: 2rem;
 }
 
 #input {
     height: 10%;
-    background-color: green;
+}
+
+#inputComponent, #commentsComponent, #usersComponent {
+    height: 100%;
+}
+
+#usersComponent {
+    padding: 1vh;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    grid-gap: 1vh;
+}
+
+.userCircle {
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50%;
+    background-color: #06374d;
+}
+
+.showOnHover {
+    display: none;
+}
+
+.userCircle:hover + .showOnHover {
+    display: block;
+}
+
+#inputComponent {
+    padding: 1vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#commentsComponent {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 2vh
 }
 
 #frame {
     height: 90%;
     border: 2px solid var(--primary-blue);
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     grid-gap: 2vh;

@@ -4,43 +4,40 @@ import {Button, Input} from "semantic-ui-react";
 import {observer} from "mobx-react";
 
 @observer
-class ChatBar extends Component {
+class ChatBarInput extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             msg: "",
-            allMsgs: []
         }
-    }
-
-    componentDidMount() {
-        store.socket.on("newMsgToAppend", (msg) => {
-            console.log(msg)
-            let tmp = [...this.state.allMsgs];
-            tmp.push(msg)
-            this.setState({allMsgs: tmp});
-        })
     }
 
     handleMsg = (e) => {
         this.setState({msg: e.target.value});
     }
 
-    submitToSockets = () => {
+    submitMessage = () => {
         store.socket.emit("newMsg", {
             msg: this.state.msg,
             from: store.user.name
-        });
-        this.setState({msg: ""})
+        })
     }
-
 
     render() {
         return (
-            <div></div>
+            <div id={"inputComponent"}>
+                <Input
+                    id={"inputComponentField"}
+                    control={"input"}
+                    type={"text"}
+                    label={"Message"}
+                    onChange={this.handleMsg}
+                    value={this.state.msg}/>
+                <Button onClick={this.submitMessage}>Send</Button>
+            </div>
         );
     }
 }
 
-export default ChatBar;
+export default ChatBarInput;
