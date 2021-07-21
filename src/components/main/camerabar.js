@@ -50,15 +50,10 @@ class Camerabar extends Component {
         return (
             <div id={"heightDef"}>
 
-                {/*If roomid => user is in session*/}
-
-                <div id={store.roomId ? "cameraBarWith" : "cameraBarWithout"}>
-
-                    {/*if allUserInRoom not empty, map all users to card*/}
-
-                    <UserCards allUserInRoom={this.state.allUserInRoom}/>
-                    <ChatBar/>
-
+                <div id={"frame"}>
+                    <div id={"names"}></div>
+                    <div id={"comments"}></div>
+                    <div id={"input"}></div>
                 </div>
 
                 <div id={store.roomId ? "leaveButton" : "noLeaveButton"}>
