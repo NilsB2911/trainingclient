@@ -7,6 +7,7 @@ import {
 import io from "socket.io-client"
 
 class Store {
+
     constructor() {
         makeObservable(this, {
             fetchWorkouts: action,
@@ -16,6 +17,7 @@ class Store {
             currentStep: observable,
             roomId: observable,
             socket: observable,
+            myPb: observable,
             isPlaying: observable,
             setUser: action,
             setStep: action,
@@ -24,7 +26,9 @@ class Store {
             zeroElapsedTime: action,
             setElapsedTimeManually: action,
             fetchUser: action,
-            setRoomId: action
+            setRoomId: action,
+            fetchProfilePicture: action,
+            setPb: action
         })
     }
 
@@ -52,6 +56,12 @@ class Store {
     roomId = null
 
     isPlaying = false
+
+    myPb = null
+
+    setPb(url) {
+        this.myPb = url
+    }
 
     setPlaying() {
         console.log("setPlaying")
@@ -96,6 +106,10 @@ class Store {
 
     setUser(newUser) {
         this.user = newUser;
+
+        if(this.user.uid !== null) {
+            this.fetchProfilePicture()
+        }
     }
 
     async fetchUser() {
@@ -106,13 +120,22 @@ class Store {
                 "Content-Type": "application/json"
             },
         }).then(response => {
-            if(response.status === 200) {
+            if (response.status === 200) {
                 response.json().then(json => this.setUser(json))
-            } else if(response.status === 403) {
+            } else if (response.status === 403) {
                 console.log("error with jwt cookie");
             }
         })
     }
+
+    async fetchProfilePicture() {
+        let userIdToUse = this.user.uid
+        await fetch(`http://localhost:3001/user/pb/${userIdToUse}`, {
+            method: "get",
+            credentials: "include"
+        }).then(res => res.json()).then(link => this.setPb(link.link))
+    }
+
 }
 
 let store = new Store();

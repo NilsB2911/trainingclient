@@ -1,10 +1,11 @@
-#registerTop, #loginTop{
+#registerTop, #loginTop {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: auto;
     padding: 5vh;
     background-color: var(--primary-blue);
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 #positionRegisterMiddle, #positionLoginMiddle {
@@ -12,6 +13,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#customUpload {
+    width: 100%;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+input[type="file"] {
+    display: none;
 }
 
 .formInput {
@@ -22,13 +34,15 @@
     margin-bottom: 4vh;
 }
 
-#registerTag {
-    margin-bottom: 7vh;
+#registerTag, #loginTag {
+    color: var(--secondary-black);
+    margin-bottom: 5vh;
 }
 
 .spaceBetweenFields {
     display: flex;
     flex-direction: column;
+    width: 100%;
     grid-gap: 10px;
     padding-bottom: 10px;
 }
@@ -39,4 +53,18 @@
 
 .registerField {
     width: 100%;
+}
+
+.loginRegisterButton {
+    width: 100%;
+}
+
+#registerHereWrapper {
+    margin-left: auto;
+    color: var(--secondary-black);
+}
+
+#registerHere {
+    text-decoration: underline;
+    cursor: pointer;
 }

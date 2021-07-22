@@ -1,12 +1,18 @@
-import React, {Component} from 'react';
+import React, {Component, createRef} from 'react';
 import {Link} from "react-router-dom";
 import {observer} from 'mobx-react';
 
 import store from "../context/Store";
 import Logout from "./functionComponents/logout";
+import {Button} from "semantic-ui-react";
 
 @observer
 class Toolbar extends Component {
+
+    constructor() {
+        super();
+    }
+
     render() {
         return (
             <div id={"wrapper"}>
@@ -25,7 +31,9 @@ class Toolbar extends Component {
                     }
                     {store.user.uid ?
                         <div id={"alignLogoutRight"}>
-                            <div id={"usernameCircle"}></div>
+                            <div id={"usernameCircle"}>
+                                <img alt={"your pb"} src={store.myPb} id={"pb"}/>
+                            </div>
                             <Logout id={"loginButtonPosition"}/>
                         </div> :
                         null}

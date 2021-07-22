@@ -22,6 +22,7 @@ class ChatBarInput extends Component {
             msg: this.state.msg,
             from: store.user.name
         })
+        this.setState({msg: ""})
     }
 
     render() {

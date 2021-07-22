@@ -30,7 +30,7 @@ export default function SubmitLogin(props) {
     }
 
     return (
-        <div>
+        <div style={{width: "100%"}}>
             {correct ? null : <p>Incorrect</p>}
             <Button className={"loginRegisterButton"} onClick={loginUser}>Submit</Button>
         </div>

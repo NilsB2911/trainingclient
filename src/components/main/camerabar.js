@@ -36,10 +36,22 @@ class Camerabar extends Component {
                 console.log(this.state.allUserInRoom)
             })
         })
+
+        store.socket.on("userDisconnected", (leftId) => {
+            let pointToSplice = 0
+            for (let i = 0; i < this.state.allUserInRoom.length; i++) {
+                if (leftId === this.state.allUserInRoom[i].userId) {
+                    pointToSplice = i;
+                }
+            }
+            let tmp = [...this.state.allUserInRoom];
+            tmp.splice(pointToSplice, 1);
+            this.setState({allUserInRoom: tmp})
+        })
     }
 
     leaveRoom = () => {
-        store.socket.emit("disconnect")
+        store.socket.disconnect()
         store.setRoomId(null)
         this.props.history.push("/");
     }

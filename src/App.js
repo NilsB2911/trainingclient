@@ -10,7 +10,6 @@ import SelectWorkout from "./pages/selectWorkout";
 import store from "./context/Store";
 import {useEffect} from "react";
 
-
 function App() {
     useEffect(() => {
         async function fetchUsers() {
