@@ -1,17 +1,12 @@
-import React, {Component, createRef} from 'react';
+import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {observer} from 'mobx-react';
 
 import store from "../context/Store";
 import Logout from "./functionComponents/logout";
-import {Button} from "semantic-ui-react";
 
 @observer
 class Toolbar extends Component {
-
-    constructor() {
-        super();
-    }
 
     render() {
         return (

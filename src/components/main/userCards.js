@@ -6,11 +6,13 @@ class UserCards extends Component {
             <div id={"usersComponent"}>
                 {this.props.allUsers.map((user) => {
                     return (
-                        <div>
+                        <div className={"circleNameWrapper"}>
                             <div className={"userCircle"}>
                                 <img src={user.pb} className={"pbsInList"} alt={"other user"}/>
                             </div>
-                            <p className={"showOnHover"}>{user.nickname}</p>
+                            <div className={"showOnHover"}>
+                                <p>{user.nickname}</p>
+                            </div>
                         </div>
 
                     )

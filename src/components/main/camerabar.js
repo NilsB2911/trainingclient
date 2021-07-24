@@ -50,30 +50,41 @@ class Camerabar extends Component {
         })
     }
 
-    leaveRoom = () => {
+    componentWillUnmount() {
+        this.leaveRoom(false)
+    }
+
+    leaveRoom = (withPush) => {
         store.socket.disconnect()
         store.setRoomId(null)
-        this.props.history.push("/");
+        if (withPush === true) {
+            this.props.history.push("/")
+        }
     }
 
 
     render() {
         return (
             <div id={"heightDef"}>
-                <div id={"frame"}>
-                    <div id={"names"}>
-                        <UserCards allUsers={this.state.allUserInRoom}/>
-                    </div>
-                    <div id={"comments"}>
-                        <ChatBarMessages/>
-                    </div>
-                    <div id={"input"}>
-                        <ChatBarInput/>
-                    </div>
-                </div>
+                {store.roomId !== null ?
+                    <div id={"frame"}>
+                        <div id={"names"}>
+                            <UserCards allUsers={this.state.allUserInRoom}/>
+                        </div>
+                        <div id={"comments"}>
+                            <ChatBarMessages/>
+                        </div>
+                        <div id={"input"}>
+                            <ChatBarInput/>
+                        </div>
+                    </div> :
+                    <div id={"blockContent"}>
+                        <p>You are not part of a room</p>
+                    </div>}
+
 
                 <div id={store.roomId ? "leaveButton" : "noLeaveButton"}>
-                    <div onClick={() => this.leaveRoom()} id={"actualLeaveButton"} className={"bebas"}>Leave room</div>
+                    <div onClick={() => this.leaveRoom(true)} id={"actualLeaveButton"} className={"bebas"}>Leave room</div>
                 </div>
             </div>
         );

@@ -55,8 +55,8 @@ export default function SaveWorkout(props) {
     }
 
     return (
-        <div>
-            <Button primary onClick={callApiNewWorkout}>Submit</Button>
+        <div style={{width: "100%"}}>
+            <Button primary onClick={callApiNewWorkout} style={{width: "100%"}}>Save Workout</Button>
         </div>
     )
 }

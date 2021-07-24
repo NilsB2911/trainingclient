@@ -101,6 +101,7 @@ class Store {
     }
 
     fetchWorkouts(workouts) {
+        console.log(workouts)
         this.allWorkouts = workouts;
     }
 

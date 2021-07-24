@@ -44,7 +44,7 @@ class SelectWorkout extends Component {
             tid: wo.tid
         })
 
-        if(store.socket.connected === false) {
+        if (store.socket.connected === false) {
             store.socket.connect()
         }
 
@@ -79,10 +79,13 @@ class SelectWorkout extends Component {
         let queryString = "http://localhost:3001/training/get/" + store.user.uid;
         await fetch(queryString, {
             method: "get",
+            headers: {
+                "Content-Type": "application/json",
+            }
         }).then(response => {
             if (response.status === 200) {
                 response.json().then(json => store.fetchWorkouts(json))
-            } else if(response.status === 404) {
+            } else if (response.status === 404) {
                 this.props.history.push("/login");
             }
         })
@@ -97,11 +100,11 @@ class SelectWorkout extends Component {
             body: JSON.stringify({
                 tid: tid,
                 uid: store.user.uid
-            })
+            }),
         }).then(response => {
             if (response.status === 204) {
-                response.json().then(json => store.fetchWorkouts(json));
-            } else if(response.status === 409) {
+                this.callWorkouts()
+            } else if (response.status === 409) {
                 console.log("couldnt delete")
             }
         })

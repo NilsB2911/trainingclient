@@ -6,7 +6,14 @@ import Countdown from 'react-countdown';
 
 import store from "../../context/Store";
 import audio from "../../global/yaaah.mp3";
+import completedSuccess from "../../global/completed.mp3"
 import Pausebutton from "./pausebutton";
+import {Button} from "semantic-ui-react";
+
+/*
+    again, keine Ahnung, warum hier notwendig
+ */
+import {withRouter} from 'react-router-dom';
 
 @observer
 class CountdownRoutine extends Component {
@@ -24,12 +31,14 @@ class CountdownRoutine extends Component {
                 store.setStep(store.currentStep + 1);
             }, 2000)
         } else {
-            this.setState({completed: true})
+            this.setState({completed: true}, () => {
+                store.setPlayingFromSocket(false);
+            })
         }
     }
 
     countdownRenderer = ({hours, minutes, seconds, completed, total}) => {
-        if (completed) {
+        if (completed && this.state.completed === false) {
             new Audio(audio).play();
         }
 
@@ -64,6 +73,10 @@ class CountdownRoutine extends Component {
         this.state.countdownApi && this.state.countdownApi.pause();
     }
 
+    pushToSelect = () => {
+        this.props.history.push("/select")
+    }
+
     render() {
         return (
             <div id={"infoBlock"} className={"headline"}>
@@ -79,7 +92,11 @@ class CountdownRoutine extends Component {
                                 controlled={false}
                                 ref={this.setRef}
                                 renderer={this.countdownRenderer}/> : <p>DONE</p>}
-                    </div> : <p>None selected</p>
+                    </div> :
+                    <div id={"noWoSelected"}>
+                        <p>You currently don't have a workout selected!</p>
+                        <Button onClick={this.pushToSelect}>Select one here</Button>
+                    </div>
                 }
                 {store.selectedWorkout.tid ? <div id={"placeButtonId"}>
                     <Pausebutton startTimer={this.startTimer} stopTimer={this.stopTimer}/>
@@ -90,4 +107,4 @@ class CountdownRoutine extends Component {
     }
 }
 
-export default CountdownRoutine;
+export default withRouter(CountdownRoutine);
